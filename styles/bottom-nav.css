@@ -1,0 +1,62 @@
+.bottom-nav{
+    font-family: Hind Siliguri;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+    box-shadow: 0px -2px 5px rgba(0,0,0,.1);
+    background: rgb(0, 0, 0);
+    height: 55px;
+    z-index: 99;
+}
+
+.bottom-nav a{
+    text-decoration: none;
+    color: inherit;
+    
+}
+
+.bottom-nav .nav-icon{
+    font-size: 22px;
+}
+
+.bottom-nav .nav-title{
+    font-size: 15px;
+    display: none;
+}
+
+.bottom-nav .nav{
+    width: 50px;
+    transition: 0.3s;
+    position: relative;
+    color: #f3e6e6;
+}
+
+.bottom-nav .nav-active{
+    font-weight: 600;
+    background: -webkit-linear-gradient(45deg, rgb(211, 55, 34), rgb(233, 53, 21));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 1px 5px rgb(0 0 0 / 20%);
+}
+
+.bottom-nav .notify-active::after{
+    content: '';
+    position: absolute;
+    height: 9px;
+    width: 9px;
+    background-color: crimson;
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    right: 0;
+    box-shadow: 0px 2px 3px rgba(0,0,0,.2);
+}
