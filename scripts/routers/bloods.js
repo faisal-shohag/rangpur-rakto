@@ -3,7 +3,6 @@ router.on({
         navManage('bloods');
         app.innerHTML = `
         <div class="tab1">
-
         <div id="donor" class="tab-item tab-active">
         <div class="tab-icon"><img src="../../images/donor.png"></div>
         <div class="tab-title">রক্ত দাতা</div>
@@ -13,21 +12,11 @@ router.on({
         <div class="tab-icon"><img src="../../images/transfusion.png"></div>
         <div class="tab-title">রক্ত গ্রহীতা</div>
         </div>
-
         </div>
-        
         <div class="tab-body">
-
-         
-        
         </div>
-      
-        
-        
-        
         `;
-
-        $(document).ready(function(){
+     $(document).ready(function(){
             $('#donor').trigger('click');
           });
 
@@ -217,5 +206,84 @@ bp.addEventListener('submit', e => {
 
         </div>
         `;
+    },
+    '/auth': function(){
+        app.innerHTML = `
+        <input type="tel" id="phoneNumber" />
+        <input type="text" id="code" />
+    
+        <!-- Add two buttons to submit the inputs -->
+        <button id="sign-in-button" >
+          SIGN IN WITH PHONE
+        </button>
+        <button id="confirm-code">
+          ENTER CODE
+        </button>
+    
+        <!-- Add a container for reCaptcha -->
+        <div id="recaptcha-container"></div>
+        
+        `
+
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+            "recaptcha-container",
+            {
+              size: "normal",
+              callback: function(response) {
+                submitPhoneNumberAuth();
+              }
+            }
+          );
+      
+          $('#sign-in-button').click(function(){
+            submitPhoneNumberAuth();
+          })
+          
+        function submitPhoneNumberAuth(){
+            console.log('signing in');
+            var phoneNumber = document.getElementById("phoneNumber").value;
+            var appVerifier = window.recaptchaVerifier;
+            firebase
+              .auth()
+              .signInWithPhoneNumber(phoneNumber, appVerifier)
+              .then(function(confirmationResult) {
+                window.confirmationResult = confirmationResult;
+                console.log(confirmationResult);
+              })
+              .catch(function(error) {
+                console.log(error);
+              });
+        }
+
+    
+          $('#confirm-code').click(function(){
+            submitPhoneNumberAuthCode()
+          })
+          
+          function submitPhoneNumberAuthCode(){
+            var code = document.getElementById("code").value;
+            confirmationResult
+              .confirm(code)
+              .then(function(result) {
+                var user = result.user;
+                console.log(user);
+              })
+              .catch(function(error) {
+                console.log(error);
+              });
+          }
+       
+         
+
+          //This function runs everytime the auth state changes. Use to verify if the user is logged in
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          console.log("USER LOGGED IN");
+        } else {
+          // No user is signed in.
+          console.log("USER NOT LOGGED IN");
+        }
+      });
+
     }
 })

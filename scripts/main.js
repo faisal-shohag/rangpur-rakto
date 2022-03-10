@@ -1,13 +1,9 @@
 
 var app = document.querySelector('#app');
-
-
-
 router.on({
     "/": function(params){
         navManage('home');
         app.innerHTML = `
-       
        <div class="sec-horz">
        <div class="card active-card" style="background: #D14142">
         <div class="card-title">সক্রিয় Rh+ রক্তদাতা </div>
