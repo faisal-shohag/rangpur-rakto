@@ -80,7 +80,7 @@ html {
     z-index: 99;
 }
 
-.appBar, .title{
+.appBar .title{
   display: flex;
   align-items: center;
   gap: 10px;
@@ -148,7 +148,7 @@ html {
     align-items: center;  
     bottom: -5px;
     right: -5px;
-    /* padding: 10px; */
+    padding: 10px;
 }
 
 .card{

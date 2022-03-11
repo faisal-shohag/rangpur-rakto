@@ -2,7 +2,6 @@
 var app = document.querySelector('#app');
 firebase.auth().onAuthStateChanged( user => {
     if (user) {
-        $('.av').hide();
      fstore.collection('users').doc(user.uid).onSnapshot((doc) => {
          if(doc.data().name == undefined)
          {
@@ -14,7 +13,9 @@ firebase.auth().onAuthStateChanged( user => {
         }else{
              $('.loader').hide();
              $('.av').show();
-
+ if(doc.data().photoURL !== undefined)      
+ $('.myPhoto').html(`<img src="${doc.data().photoURL}">`);
+ $('#my-group').text(doc.data().group);
 router.on({
     "/": function(params){
         navManage('home');
@@ -75,16 +76,17 @@ router.on({
       
 `;
     },
-}).resolve();
 
-
-
-function navManage(page) {
-    $('.nav').removeClass('nav-active');
-    $('#'+page).addClass('nav-active');
-    $('.nav-title').hide();
-    $('#'+page+' .nav-title').show();
+    
 }
+
+).resolve();
+
+blood()
+
+
+
+
 
 }
 })
@@ -93,3 +95,10 @@ function navManage(page) {
  router.navigate('/auth');
 }
 });
+
+function navManage(page) {
+    $('.nav').removeClass('nav-active');
+    $('#'+page).addClass('nav-active');
+    $('.nav-title').hide();
+    $('#'+page+' .nav-title').show();
+}

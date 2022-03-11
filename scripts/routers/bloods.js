@@ -1,3 +1,4 @@
+function blood(){
 router.on({
   "/bloods": function (params) {
     navManage("bloods");
@@ -460,7 +461,9 @@ router
       userInfo.addEventListener('submit', e=>{
         e.preventDefault();
         let donate_date = null;
+        let donor = false;
         if(userInfo.donate_status.value === "yes"){
+          donor = true;
           donate_date = userInfo.donate_date.value;
         }
         
@@ -470,7 +473,8 @@ router
           gender: userInfo.gender.value,
           donate_date: donate_date,
           group: userInfo.group.value,
-          details: userInfo.details.value
+          details: userInfo.details.value,
+          isDonor: donor
 
         }
         fstore.collection('users').doc(params.id).update(data).then(()=>{
@@ -549,5 +553,5 @@ router
 
 
     },
-  })
-  .resolve();
+  }).resolve();
+}
