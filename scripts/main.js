@@ -1,5 +1,6 @@
 
 var app = document.querySelector('#app');
+
 router.on({
     "/": function(params){
         navManage('home');
