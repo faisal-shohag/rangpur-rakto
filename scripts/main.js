@@ -1,5 +1,19 @@
 
 var app = document.querySelector('#app');
+firebase.auth().onAuthStateChanged( user => {
+         
+    if (user) {
+      
+     fstore.collection('users').doc(user.uid).onSnapshot((doc) => {
+         if(doc.data().name == undefined)
+         {
+            // $('.appBar').hide();
+            $('.bottom-nav').hide();
+            $('.av').hide();
+            router.navigate('/info/'+ user.uid);
+            $('.loader').hide();
+        }else{
+             $('.loader').hide();
 
 router.on({
     "/": function(params){
@@ -71,3 +85,11 @@ function navManage(page) {
     $('.nav-title').hide();
     $('#'+page+' .nav-title').show();
 }
+
+}
+})
+
+} else {
+ router.navigate('/auth');
+}
+});
