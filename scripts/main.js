@@ -1,9 +1,8 @@
 
 var app = document.querySelector('#app');
 firebase.auth().onAuthStateChanged( user => {
-         
     if (user) {
-      
+        $('.av').hide();
      fstore.collection('users').doc(user.uid).onSnapshot((doc) => {
          if(doc.data().name == undefined)
          {
@@ -14,6 +13,7 @@ firebase.auth().onAuthStateChanged( user => {
             $('.loader').hide();
         }else{
              $('.loader').hide();
+             $('.av').show();
 
 router.on({
     "/": function(params){
