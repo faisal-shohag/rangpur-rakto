@@ -334,7 +334,8 @@ router
               $(".appBar").show();
               $(".bottom-nav").show();
               $(".av").show();
-              router.navigate("/");
+              
+              window.location.reload();
             });
         } else {
           console.log("USER NOT LOGGED IN");
