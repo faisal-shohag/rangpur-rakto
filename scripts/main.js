@@ -15,6 +15,8 @@ firebase.auth().onAuthStateChanged( user => {
  if(doc.data().photoURL !== undefined)      
  $('.myPhoto').html(`<img src="${doc.data().photoURL}">`);
  $('#my-group').text(doc.data().group);
+  
+ getLatLong(user.uid);
 
 router.on({
     "/": function(params){
@@ -77,18 +79,15 @@ router.on({
 `;
 
 console.log(dayDef(doc.data().donate_date));
-
 fstore.collection('users').where('isDonor', '==', true).onSnapshot(querySnapshot=>{
     let donor = [];
     querySnapshot.forEach(element => {
         donor.push(element.data());
     });
-    //console.log(donor);
     $('.donor-count').text(donor.length +' জন');
  });
 
  fstore.collection('users').onSnapshot(querySnapshot=>{
-    // console.log(querySnapshot.docs);
     $('.member-count').text(querySnapshot.docs.length + ' জন')
  });
     },
@@ -122,7 +121,48 @@ function navManage(page) {
 function dayDef(date){
  let defInTime = (new Date()).getTime() - (new Date(date)).getTime();
  let defInDay = defInTime / (1000*3600*24);
-
  return parseInt(defInDay);
-
 }
+
+
+
+function getLatLong(id){
+    if(navigator.geolocation) {
+        
+        navigator.geolocation.getCurrentPosition((position)=>{
+            console.log('Location allowed!')
+            fstore.collection('users').doc(id).update({
+                lat: position.coords.latitude,
+                lon: position.coords.longitude
+            });
+        })
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Not supported!',
+            text: 'Geolocation is not supported by your browser!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          }) 
+    }
+    
+}
+
+
+navigator.permissions && navigator.permissions.query({name: 'geolocation'})
+.then(function(PermissionStatus) {
+    if (PermissionStatus.state == 'granted') {
+         console.log('granted!')
+    } else if (PermissionStatus.state == 'prompt') {
+        Swal.fire({
+            icon: 'error',
+            title: 'আপনার লোকেশন সার্ভিস অফ!',
+            text: 'দয়া করে লোকেশন সার্ভিসটি Allow করুন।',
+          }) 
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'আপনার লোকেশন সার্ভিস অফ!',
+            text: 'দয়া করে লোকেশন সার্ভিসটি Allow করুন।',
+          }) 
+    }
+})
