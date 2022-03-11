@@ -5,7 +5,6 @@ firebase.auth().onAuthStateChanged( user => {
      fstore.collection('users').doc(user.uid).onSnapshot((doc) => {
          if(doc.data().name == undefined)
          {
-            // $('.appBar').hide();
             $('.bottom-nav').hide();
             $('.av').hide();
             router.navigate('/info/'+ user.uid);
@@ -16,20 +15,21 @@ firebase.auth().onAuthStateChanged( user => {
  if(doc.data().photoURL !== undefined)      
  $('.myPhoto').html(`<img src="${doc.data().photoURL}">`);
  $('#my-group').text(doc.data().group);
+
 router.on({
     "/": function(params){
         navManage('home');
         app.innerHTML = `
        <div class="sec-horz">
        <div class="card active-card" style="background: #D14142">
-        <div class="card-title">সক্রিয় Rh+ রক্তদাতা </div>
-        <div class="card-num">53 জন</div>
+        <div class="card-title">সক্রিয় রক্তদাতা </div>
+        <div class="card-num donor-count">53 জন</div>
         <div class="card-icon"><img src="../images/rh+.png"></div>
        </div>
       
        <div class="card active-card" style="background: #FA7449">
-       <div class="card-title">সক্রিয় Rh- রক্তদাতা </div>
-       <div class="card-num">31 জন</div>
+       <div class="card-title">মোট মেম্বার </div>
+       <div class="card-num member-count">31 জন</div>
        <div class="card-icon"><img src="../images/rh-.png"></div>
        </div>
        </div>
@@ -75,6 +75,22 @@ router.on({
        </div>
       
 `;
+
+console.log(dayDef(doc.data().donate_date));
+
+fstore.collection('users').where('isDonor', '==', true).onSnapshot(querySnapshot=>{
+    let donor = [];
+    querySnapshot.forEach(element => {
+        donor.push(element.data());
+    });
+    //console.log(donor);
+    $('.donor-count').text(donor.length +' জন');
+ });
+
+ fstore.collection('users').onSnapshot(querySnapshot=>{
+    // console.log(querySnapshot.docs);
+    $('.member-count').text(querySnapshot.docs.length + ' জন')
+ });
     },
 
     
@@ -101,4 +117,12 @@ function navManage(page) {
     $('#'+page).addClass('nav-active');
     $('.nav-title').hide();
     $('#'+page+' .nav-title').show();
+}
+
+function dayDef(date){
+ let defInTime = (new Date()).getTime() - (new Date(date)).getTime();
+ let defInDay = defInTime / (1000*3600*24);
+
+ return parseInt(defInDay);
+
 }
