@@ -80,19 +80,20 @@
      var fstore = firebase.firestore();
     $('.loader').show();
      firebase.auth().onAuthStateChanged( user => {
-         $('.loader').hide();
+         
         if (user) {
           
          fstore.collection('users').doc(user.uid).onSnapshot((doc) => {
-             if(!doc.data().name)
+             if(doc.data().name == undefined)
              {
                 // $('.appBar').hide();
                 $('.bottom-nav').hide();
                 $('.av').hide();
                 router.navigate('/info/'+ user.uid);
+                $('.loader').hide();
             }else{
                  router.navigate('/');
-                
+                 $('.loader').hide();
                 }
          })
 
