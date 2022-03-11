@@ -25,14 +25,14 @@ router.on({
        <div class="sec-horz">
        <div class="card active-card" style="background: #D14142">
         <div class="card-title">সক্রিয় রক্তদাতা </div>
-        <div class="card-num donor-count">53 জন</div>
-        <div class="card-icon"><img src="../images/rh+.png"></div>
+        <div class="card-num donor-count">... জন</div>
+        <div class="card-icon"><img height="60px" src="../images/donor.png"></div>
        </div>
       
        <div class="card active-card" style="background: #FA7449">
-       <div class="card-title">মোট মেম্বার </div>
-       <div class="card-num member-count">31 জন</div>
-       <div class="card-icon"><img src="../images/rh-.png"></div>
+       <div class="card-title">গ্রহীতা </div>
+       <div class="card-num rec-count">... জন</div>
+       <div class="card-icon"><img height="60px" src="../images/transfusion.png"></div>
        </div>
        </div>
 
@@ -77,20 +77,16 @@ router.on({
        </div>
       
 `;
+fstore.collection('donor').orderBy("creationTime", "desc").onSnapshot(snap=>{
+    $('.donor-count').text(snap.docs.length + ' জন');
+   
+   });
+fstore.collection('recipient').orderBy("creationTime", "desc").onSnapshot(snap=>{
+    $('.rec-count').text(snap.docs.length + ' জন');
 
-console.log(dayDef(doc.data().donate_date));
-fstore.collection('users').where('isDonor', '==', true).onSnapshot(querySnapshot=>{
-    let donor = [];
-    querySnapshot.forEach(element => {
-        donor.push(element.data());
-    });
-    $('.donor-count').text(donor.length +' জন');
- });
-
- fstore.collection('users').onSnapshot(querySnapshot=>{
-    $('.member-count').text(querySnapshot.docs.length + ' জন')
- });
-    },
+});
+    
+},
 
     
 }
@@ -123,6 +119,13 @@ function dayDef(date){
  let defInDay = defInTime / (1000*3600*24);
  return parseInt(defInDay);
 }
+
+// moment js for time counting
+function getRelativeTime(date) {
+    const dateInMillis  = date.seconds * 1000
+    d = new Date(dateInMillis).toDateString() + ' ' + new Date(dateInMillis).toLocaleTimeString()
+        return moment(new Date(d)).fromNow();
+    }
 
 
 
@@ -168,7 +171,7 @@ navigator.permissions && navigator.permissions.query({name: 'geolocation'})
     }
 })
 
-
+/*
 
 function getDistanceByGeoPoint(lat1, lon1, lat2, lon2){
     var R = 6371; // km
@@ -206,9 +209,5 @@ console.log(
     'meters away from 51.525, 7.4575'
 );
 
-// moment js for time counting
-function getRelativeTime(date) {
-const dateInMillis  = date.seconds * 1000
-d = new Date(dateInMillis).toDateString() + ' ' + new Date(dateInMillis).toLocaleTimeString()
-    return moment(new Date(d)).fromNow();
-}
+
+*/

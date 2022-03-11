@@ -45,18 +45,6 @@ router.on({
                 <div class="post-time">${getRelativeTime(data.creationTime)}</div>
                 </div></div>
                 <div class="location"><img src="../../images/location.png"> ${data.location}</div>
-                <div class="">পোস্টকারী আপনার থেকে ${
-                  geolib.getDistance(
-                    {
-                        latitude: data.lat,
-                        longitude: data.lon,
-                    },
-                    {
-                    latitude: mydata.lat,
-                    longitude: mydata.lon,
-                })
-
-                } m  দুরে অবস্থান করেন। </div>
                 <div class="post-contacts">
                 <a href="tel:${data.phone}"><div class="post-contact-icon"><i class="icofont-ui-call"></i></div></a>
                 <div class="post-contact-icon"><i class="icofont-ui-message"></i></div>
