@@ -97,7 +97,7 @@ fstore.collection('users').where('isDonor', '==', true).onSnapshot(querySnapshot
 
 ).resolve();
 
-blood()
+blood(doc.data());
 
 
 
@@ -131,6 +131,7 @@ function getLatLong(id){
         
         navigator.geolocation.getCurrentPosition((position)=>{
             console.log('Location allowed!')
+            
             fstore.collection('users').doc(id).update({
                 lat: position.coords.latitude,
                 lon: position.coords.longitude
@@ -166,3 +167,48 @@ navigator.permissions && navigator.permissions.query({name: 'geolocation'})
           }) 
     }
 })
+
+
+
+function getDistanceByGeoPoint(lat1, lon1, lat2, lon2){
+    var R = 6371; // km
+    var dLat = toRad(lat2-lat1);
+    var dLon = toRad(lon2-lon1);
+    var lat1 = toRad(lat1);
+    var lat2 = toRad(lat2);
+
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c;
+    return d*1000; 
+}
+
+function toRad(value){
+    return value * Math.PI / 180;
+}
+
+
+console.log(getDistanceByGeoPoint(25.9096536,89.4306251,25.9092413,89.4323907));
+
+console.log(
+    'You are ',
+    
+    geolib.getDistance(
+        {
+            latitude: 25.9096536,
+            longitude: 89.4306251,
+        },
+        {
+        latitude: 25.9092413,
+        longitude: 89.4323907,
+    }),
+    'meters away from 51.525, 7.4575'
+);
+
+// moment js for time counting
+function getRelativeTime(date) {
+const dateInMillis  = date.seconds * 1000
+d = new Date(dateInMillis).toDateString() + ' ' + new Date(dateInMillis).toLocaleTimeString()
+    return moment(new Date(d)).fromNow();
+}

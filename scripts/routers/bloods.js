@@ -1,4 +1,4 @@
-function blood(){
+function blood(mydata){
 router.on({
   "/bloods": function (params) {
     navManage("bloods");
@@ -22,76 +22,75 @@ router.on({
     });
 
     const tab_body = document.querySelector(".tab-body");
-    tab_body.innerHTML = "";
+    
     $(".tab-item").click(function (e) {
+      tab_body.innerHTML = `
+      <div class="lds-dual-ring"></div>
+      `;
       let id = $(this)[0].id;
       if (id === "donor") {
         $("#" + id).addClass("tab-active");
         $("#recipient").removeClass("tab-active");
-
-        tab_body.innerHTML = `
-                <div class=" blood-post">
-                <div class="blood-group"><img src="../../images/group/AB+.png"></div>
-                <div class="donor"><div class="donor-avatar"><img src="../../images/blood-donor-female.png"></div>
+       
+        fstore.collection('donor').orderBy("creationTime", "desc").onSnapshot(snap=>{
+          tab_body.innerHTML ="";
+          snap.forEach(element => {
+            let data = element.data();
+            tab_body.innerHTML += `
+            <div class=" blood-post">
+                <div class="blood-group"><img src="../../images/group/${data.group}.png"></div>
+                <div class="donor"><div class="donor-avatar"><img src="../../images/blood-donor-${data.gender}.png"></div>
                 <div class="post-at">
-                <div class="post-author">ফায়সাল সোহাগ</div>
-                <div class="post-time">2 mins ago</div>
+                <div class="post-author">${data.donor}</div>
+                <div class="post-time">${getRelativeTime(data.creationTime)}</div>
                 </div></div>
-                <div class="location"><img src="../../images/location.png"> শাপলা, রংপুর</div>
+                <div class="location"><img src="../../images/location.png"> ${data.location}</div>
+                <div class="">পোস্টকারী আপনার থেকে ${
+                  geolib.getDistance(
+                    {
+                        latitude: data.lat,
+                        longitude: data.lon,
+                    },
+                    {
+                    latitude: mydata.lat,
+                    longitude: mydata.lon,
+                })
+
+                } m  দুরে অবস্থান করেন। </div>
                 <div class="post-contacts">
-                <div class="post-contact-icon"><i class="icofont-ui-call"></i></div>
+                <a href="tel:${data.phone}"><div class="post-contact-icon"><i class="icofont-ui-call"></i></div></a>
                 <div class="post-contact-icon"><i class="icofont-ui-message"></i></div>
                 </div>
                 </div>
-
-                <div class=" blood-post">
-                <div class="blood-group"><img src="../../images/group/AB+.png"></div>
-                <div class="donor"><div class="donor-avatar"><img src="../../images/blood-donor-female.png"></div>
-                <div class="post-at">
-                <div class="post-author">ফায়সাল সোহাগ</div>
-                <div class="post-time">2 mins ago</div>
-                </div></div>
-                <div class="location"><img src="../../images/location.png"> শাপলা, রংপুর</div>
-                <div class="post-contacts">
-                <div class="post-contact-icon"><i class="icofont-ui-call"></i></div>
-                <div class="post-contact-icon"><i class="icofont-ui-message"></i></div>
-                </div>
-                </div>
-
-
-                <div class=" blood-post">
-                <div class="blood-group"><img src="../../images/group/AB+.png"></div>
-                <div class="donor"><div class="donor-avatar"><img src="../../images/blood-donor-female.png"></div>
-                <div class="post-at">
-                <div class="post-author">ফায়সাল সোহাগ</div>
-                <div class="post-time">2 mins ago</div>
-                </div></div>
-                <div class="location"><img src="../../images/location.png"> শাপলা, রংপুর</div>
-                <div class="post-contacts">
-                <div class="post-contact-icon"><i class="icofont-ui-call"></i></div>
-                <div class="post-contact-icon"><i class="icofont-ui-message"></i></div>
-                </div>
-                </div>
-                `;
+            `
+          });
+        })
       } else {
         $("#" + id).addClass("tab-active");
         $("#donor").removeClass("tab-active");
 
-        tab_body.innerHTML = `
-                <div class=" blood-post">
-                <div class="blood-group"><img src="../../images/group/AB+.png"></div>
-                <div class="donor"><div class="donor-avatar"><img src="../../images/blood-donor-female.png"></div>
+        fstore.collection('recipient').orderBy("creationTime", "desc").onSnapshot(snap=>{
+          tab_body.innerHTML =""
+          snap.forEach(element => {
+            let data = element.data();
+            tab_body.innerHTML += `
+            <div class=" blood-post">
+                <div class="blood-group"><img src="../../images/group/${data.group}.png"></div>
+                <div class="donor"><div class="donor-avatar"><img src="../../images/blood-donor-${data.gender}.png"></div>
                 <div class="post-at">
-                <div class="post-author">ফায়সাল সোহাগ</div>
-                <div class="post-time">2 mins ago</div>
+                <div class="post-author">${data.donor}</div>
+                <div class="post-time">${getRelativeTime(data.creationTime)}</div>
                 </div></div>
-                <div class="location"><img src="../../images/location.png"> শাপলা, রংপুর</div>
+                <div class="location"><img src="../../images/location.png"> ${data.location}</div>
+               
                 <div class="post-contacts">
-                <div class="post-contact-icon"><i class="icofont-ui-call"></i></div>
+                <a href="tel:${data.phone}"><div class="post-contact-icon"><i class="icofont-ui-call"></i></div></a>
                 <div class="post-contact-icon"><i class="icofont-ui-message"></i></div>
                 </div>
                 </div>
-                `;
+            `
+          });
+        })
       }
     });
   },
@@ -126,12 +125,22 @@ router.on({
     <div class="col-half">
       <h4>একটি ঠিক করুন</h4>
       <div class="input-group">
-        <input id="gender-male" type="radio" name="status" value="donor" required/>
-        <label for="gender-male">রক্ত দিতে চাই</label>
-        <input id="gender-female" type="radio" name="status" value="recipient" required/>
-        <label for="gender-female">রক্ত নিতে চাই</label>
+        <input id="dnr" type="radio" name="status" value="donor" required/>
+        <label for="dnr">রক্ত দিতে চাই</label>
+        <input id="rcp" type="radio" name="status" value="recipient" required/>
+        <label for="rcp">রক্ত নিতে চাই</label>
       </div>
     </div>
+  </div>
+
+  <h4>জেন্ডার নির্ধারণ করুন</h4>
+  <div class="input-group">
+    <input id="gender-male" type="radio" name="gender" value="male" required/>
+    <label for="gender-male">পুরুষ</label>
+    <input id="gender-female" type="radio" name="gender" value="female" required/>
+    <label for="gender-female">নারী</label>
+    <input id="gender-female" type="radio" name="gender" value="other" required/>
+    <label for="gender-female">অন্যান্য</label>
   </div>
 
   <h4>যে রক্তের গ্রুপ দিতে চান বা নিতে চান</h4>
@@ -163,16 +172,25 @@ router.on({
 
     bp.addEventListener("submit", (e) => {
       e.preventDefault();
-      let data = {
+       fstore.collection(bp.status.value).add({
         donor: bp.name.value,
         phone: bp.phone.value,
         location: bp.location.value,
-        status: bp.status.value,
         group: bp.group.value,
+        gender: bp.gender.value,
         details: bp.details.value,
-      };
+        lat: 89.4323907,
+        lon: 25.9092413,
+        creationTime: firebase.firestore.Timestamp.fromDate(
+          new Date())
+       });
 
-      console.log(data);
+       Swal.fire({
+        icon: 'success',
+        title: 'সম্পন্ন হয়েছে!',
+        text: 'আপনার পোস্টটি পাবলিশ হয়েছে!',
+      });
+
       bp.reset();
     });
   },
@@ -324,8 +342,7 @@ router
               {
                 phone: user.phoneNumber,
                 uid: user.uid,
-                creationTime: (myTimestamp =
-                  firebase.firestore.Timestamp.fromDate(
+                creationTime: (firebase.firestore.Timestamp.fromDate(
                     new Date(user.metadata.creationTime)
                   )),
               },
