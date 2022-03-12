@@ -769,7 +769,6 @@ router
 
     fstore.collection('users').doc(params.id).onSnapshot(snap=>{
       let data = snap.data();
-      console.log(data);
       profile_container.innerHTML = `
 
      <div class="profile-top">
