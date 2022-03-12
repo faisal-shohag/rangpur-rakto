@@ -491,6 +491,7 @@ a {
     flex-direction: column;
     gap: 5px;
     align-items: center;
+    padding: 20px;
 }
 
 .profile-avatar{
@@ -522,7 +523,7 @@ a {
     padding: 20px;
  display: flex;
  flex-direction: column;
- gap: 20px;
+ /* gap: 20px; */
  justify-content: center;
 }
 
@@ -534,6 +535,12 @@ a {
 .profile-section{
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid rgb(236, 224, 224);
+    padding: 10px;
+}
+
+.profile-section:nth-child(1){
+    border-top: 1px solid rgb(236, 224, 224);
 }
 
 .profile-info-icon img{
