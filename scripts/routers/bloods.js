@@ -104,7 +104,7 @@ router.on({
             let data = element.data();
             if(uid === data.uid){
               tab_body.innerHTML += `
-              <div class=" blood-post">
+              <div  class="blood-post">
                   <div class="blood-group"><img src="../../images/group/${data.group}.png"></div>
                   <div class="donor"><div class="donor-avatar"><img src="../../images/blood-donor-${data.gender}.png"></div>
                   <div class="post-at">
@@ -266,31 +266,12 @@ router.on({
     $('#appBarTitle').text('সার্চ');
     navManage("search");
     app.innerHTML = `
-        <div class="tab-body">
         
-         <div class="blood-post">
-          <div class="ntf-logo">
-          <img src="../../images/donor.png">
-          <div class="ntf-desc">
-          <div class="sender">Faisal Shohag • <span class="time">Just now</span></div>
-          <div class="type">রক্ত দিতে চান</div>
-          </div>
-          </div>
-      </div>
-
-      <div class="blood-post">
-          <div class="ntf-logo">
-          <img src="../../images/donor.png">
-          <div class="ntf-desc">
-          <div class="sender">Faisal Shohag • <span class="time">Just now</span></div>
-          <div class="type">রক্ত দিতে চান</div>
-          </div>
-          </div>
-      </div>
-
-        </div>
         `;
   },
+  "/single_post/:id":function(){
+
+  }
 });
 
 router
@@ -406,7 +387,7 @@ router
         }
         if(data.photoURL == undefined){
           fstore.collection('users').doc(params.id).update({
-            photoURL: "https://cdn-icons.flaticon.com/png/512/2202/premium/2202112.png?token=exp=1647061657~hmac=4f880c4c47daab27e9b1b7fbf4e69563",
+            photoURL: "https://firebasestorage.googleapis.com/v0/b/rangpur-rakto.appspot.com/o/profile%2Fuser.png?alt=media&token=d71fdf2e-95f9-4863-a003-979f765cc736",
           })
         }
 
@@ -683,7 +664,6 @@ router
   
       </div>
       <div class="profile-footer"><b>Joined </b>${timestampToDate(data.creationTime)}</div>
-      
       `
 
       if(params.id === uid){

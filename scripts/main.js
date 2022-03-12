@@ -42,28 +42,38 @@ router.on({
        </div>
 
        <div class="section-title">
-      <img src="../images/blood-req.png"> আবেদন
+      <img src="../images/blood-req.png"> প্রয়োজনীয়
+       </div>
+
+       <div class="menu">
+
+       <div class="menu-item">
+       <div class="menu-icon"><img src="../images/blood-organization.png"></div>
+       <div class="menu-title">সংগঠন</div>
+       </div>
+
+
+       <div class="menu-item">
+       <div class="menu-icon"><img src="../images/blood-bank.png"></div>
+       <div class="menu-title">ব্লাড ব্যাংক</div>
+       </div>
+
+       
+       <div class="menu-item">
+       <div class="menu-icon"><img src="../images/oxygen-tank.png"></div>
+       <div class="menu-title">অক্সিজেন</div>
+       </div>
+
+       <div class="menu-item">
+       <div class="menu-icon"><img src="../images//ambulance.png"></div>
+       <div class="menu-title">অ্যাম্বুলেন্স</div>
+       </div>
+
        </div>
 
        
        
-       <div class="post">
-       <div class="post-top">
-       <div class="post-avatar"><img src="https://pbs.twimg.com/card_img/1501783349148676097/Zy1RLntb?format=jpg&name=small"></div>
-       <div class="post-at">
-       <div class="post-author">ফয়সাল সোহাগ</div>
-       <div class="post-time">2 hrs ago</div>
-       </div>
-       <div class="post-contacts">
-       <div class="post-contact-icon"><i class="icofont-ui-call"></i></div>
-       <div class="post-contact-icon"><i class="icofont-telegram"></i></div>
-       <div class="post-contact-icon"><i class="icofont-whatsapp"></i></div>
-       </div>
-       </div>
-       <div class="post-body">
-       ভাটার সময় নৌপথটির সর্বোচ্চ দূরত্ব দাঁড়ায় ১৬ কিলোমিটার। সরকার নির্ধারিত ভাড়া প্রতি কিলোমিটার ২ টাকা ৩০ পয়সা। এ হারে ভাড়া হয় ৪০ টাকা ৮০ পয়সা। সেখানে ইজারাদার ভাড়া নিচ্ছেন ১২০ টাকা। শুধু বেশি ভাড়া নিচ্ছেন এমন নয়, লঞ্চে উঠতে প্রতি যাত্রীকে কাটতে হয় ১০ টাকার ঘাটটিকিট। অথচ যাত্রী পারাপারে ব্যবহার করা হচ্ছে দুটি ফিটনেসবিহীন লঞ্চ। যাত্রীদের জুলুমের এই চিত্র মেঘনা নদীর নতুন স্লুইস (চরফ্যাশন)-জনতাবাজার (মনপুরা) আন্ত-উপজেলা নৌপথে।
-       </div>
-       </div>
+ 
       
 `;
 fstore.collection('donor').orderBy("creationTime", "desc").onSnapshot(snap=>{
