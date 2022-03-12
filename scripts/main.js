@@ -10,6 +10,7 @@ firebase.auth().onAuthStateChanged( user => {
             router.navigate('/info/'+ user.uid);
             $('.loader').hide();
         }else{
+            router.navigate('/');
              $('.loader').hide();
              $('.av').show();
  if(doc.data().photoURL !== undefined)  
