@@ -21,7 +21,6 @@ firebase.auth().onAuthStateChanged( user => {
  $('#my-group').text(doc.data().group);
   
  getLatLong(user.uid);
-
 router.on({
     "/": function(params){
         $('#appBarTitle').text('রংপুর রক্ত');
@@ -68,13 +67,7 @@ router.on({
        <div class="menu-icon"><img src="../images//ambulance.png"></div>
        <div class="menu-title">অ্যাম্বুলেন্স</div>
        </div>
-
        </div>
-
-       
-       
- 
-      
 `;
 fstore.collection('donor').orderBy("creationTime", "desc").onSnapshot(snap=>{
     $('.donor-count').text(snap.docs.length + ' জন');
