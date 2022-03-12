@@ -55,6 +55,36 @@ html {
     margin-top: 60px;
     border-radius: 10px;
     position:relative;
+    height: 100vh;
+  }
+
+  .screen{
+      position: fixed;
+      display: flex;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 50px;
+      z-index: 9999999;
+      background: #fff;
+  }
+
+  .screen .sps-image img{
+    height: 110px;
+  }
+
+  .screen .sps-title{
+      font-family: Hind Siliguri;
+      font-weight: bold;
+      font-size: 30px;
+      background: -webkit-linear-gradient(45deg, rgb(211, 55, 34), rgb(172, 18, 102));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0px 1px 5px rgb(0 0 0 / 20%);
   }
 
   .sec-horz{

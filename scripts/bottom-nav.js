@@ -11,20 +11,19 @@ const nav_data = [
         icon: '<i class="icofont-blood-drop"></i>',
         link: '/rank'
     },
-
-    {
-        title: 'সার্চ',
-        id: 'search',
-        icon: '<i class="icofont-search-1"></i>',
-        link: '/search'
-    },
-
     {
         title: 'পোস্ট',
         id: 'post',
         icon: '<i class="icofont-ui-add"></i>',
         link: '/post'
     },
+
+    // {
+    //     title: 'সার্চ',
+    //     id: 'search',
+    //     icon: '<i class="icofont-search-1"></i>',
+    //     link: '/search'
+    // },
 
 ]
 const bottom_nav = document.querySelector('.bottom-nav');

@@ -6,7 +6,7 @@ router.on({
     app.innerHTML = `
     <div class="search-bar">
     <div class="search-icon"><img src="../../images/search.png"></div>
-    <input id="search-input" placeholder="রক্তের গ্রুপ সার্চ করুন..." type="text" name="search"/>
+    <input autocomplete="off" id="search-blood" placeholder="রক্তের গ্রুপ সার্চ করুন..." type="text" name="search"/>
     </div>
 
     </div>
@@ -64,7 +64,7 @@ router.on({
                   <div class="location"><img src="../../images/location.png"> ${data.location}</div>
                   <div class="end">
                   <a href="#!/profile/${data.uid}"><div class="postBy"><i class="icofont-user"></i></div></a>
-                  <a href="#!/editblood-post/donor/${element.id}"><div class="edit"><i class="icofont-edit"></i></div></a>
+                  <a href="#!/edit/donor/${element.id}"><div class="edit"><i class="icofont-edit"></i></div></a>
                   <div id="${element.id}" class="delete"><i class="icofont-ui-delete"></i></div>
                   </div>
                   </div>
@@ -180,14 +180,13 @@ router.on({
       }
 
         //Searching..
-        document.getElementById('search-input').addEventListener('keyup', e=>{
+        document.getElementById('search-blood').addEventListener('keyup', e=>{
           if(e.key = 'Enter'){
             e.preventDefault();
-            let filter = ($('#search-input')[0].value).toUpperCase();
+            let filter = ($('#search-blood')[0].value).toUpperCase();
             let allPost = document.querySelectorAll('.search-tag');
             for(let i=0; i<allPost.length; i++){
               tag = allPost[i].innerText;
-              console.log("Tag:" + tag);
               if(tag.indexOf(filter) > -1) {
                 allPost[i].parentNode.style.display = "";
               } else{

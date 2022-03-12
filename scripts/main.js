@@ -3,6 +3,7 @@ var app = document.querySelector('#app');
 firebase.auth().onAuthStateChanged( user => {
     if (user) {
      fstore.collection('users').doc(user.uid).onSnapshot((doc) => {
+         $('.splash_screen').hide();
          if(doc.data().name == undefined)
          {
             $('.bottom-nav').hide();
@@ -10,6 +11,7 @@ firebase.auth().onAuthStateChanged( user => {
             router.navigate('/info/'+ user.uid);
             $('.loader').hide();
         }else{
+            $('.splash_screen').hide();
             router.navigate('/');
              $('.loader').hide();
              $('.av').show();
