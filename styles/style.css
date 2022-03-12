@@ -535,12 +535,12 @@ a {
 .profile-section{
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid rgb(236, 224, 224);
+    border-bottom: 1px solid rgb(235, 232, 232);
     padding: 10px;
 }
 
 .profile-section:nth-child(1){
-    border-top: 1px solid rgb(236, 224, 224);
+    border-top: 1px solid rgb(235, 232, 232);
 }
 
 .profile-info-icon img{
@@ -554,3 +554,25 @@ a {
   color: gray;
 }
 
+
+.le{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    padding: 20px;
+}
+
+.profile-button{
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    height: 30px;
+    width: 30px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: orangered;
+    font-size: 20px;
+}
