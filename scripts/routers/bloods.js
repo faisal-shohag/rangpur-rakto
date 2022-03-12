@@ -76,7 +76,7 @@ router.on({
                 <div class="post-body">${data.details}</div>
                 <div class="post-foot-area">
                 <div class="location"><img src="../../images/location.png"> ${data.location}</div>
-                <div id="${data.uid}" class="postBy"><i class="icofont-user"></i></div>
+                <a href="#!/profile/${data.uid}"><div class="postBy"><i class="icofont-user"></i></div></a>
                 </div>
                
                 <div class="post-contacts">
@@ -139,7 +139,7 @@ router.on({
 
                 <div class="post-foot-area">
                 <div class="location"><img src="../../images/location.png"> ${data.location}</div>
-                <div id="${data.uid}" class="postBy"><i class="icofont-user"></i></div>
+                <a href="#!/profile/${data.uid}"><div class="postBy"><i class="icofont-user"></i></div></a>
                 </div>
                
                 <div class="post-contacts">
@@ -757,12 +757,58 @@ router
         bp.reset();
       });
     },
-  }).resolve();
 
+    "/profile/:id": function(params){   
+      $('#appBarTitle').text('প্রোফাইল');
+    app.innerHTML= `
+     <div class="profile-container"></div>
+     
+   
+    `
+    const profile_container = document.querySelector('.profile-container');
+
+    fstore.collection('users').doc(params.id).onSnapshot(snap=>{
+      let data = snap.data();
+      console.log(data);
+      profile_container.innerHTML = `
+
+     <div class="profile-top">
+      <div class="profile-avatar"><img src="${data.photoURL}"></div>
+      <div class="profile-name">${data.name}</div>
+      <div class="profile-bio">${data.details}</div>
+      </div>
+      
+      <div class="profile-body">
+      <div class="profile-section">
+      <div class="profile-info-icon"><img src="../../images/phone.png"></div>
+      <div class="profile-info-text">${data.phone}</div>
+      </div>
+
+      <div class="profile-section">
+      <div class="profile-info-icon"><img src="../../images/gender.png"></div>
+      <div class="profile-info-text">${data.gender}</div>
+      </div>
+
+      <div class="profile-section">
+      <div class="profile-info-icon"><img src="../../images/location.png"></div>
+      <div class="profile-info-text">${data.location}</div>
+      </div>
+  
+      </div>
+      <div class="profile-footer"><b>Joined </b>${timestampToDate(data.creationTime)}</div>
+      
+      `
+
+    })
+    }
+
+
+  }).resolve();
   
 }
 
 function deletePost(postId, postCollection){
+  
   console.log(postId);
   Swal.fire({
     title: 'পোস্টটি ডিলিট করতে চান?',

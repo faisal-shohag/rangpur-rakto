@@ -12,8 +12,11 @@ firebase.auth().onAuthStateChanged( user => {
         }else{
              $('.loader').hide();
              $('.av').show();
- if(doc.data().photoURL !== undefined)      
- $('.myPhoto').html(`<img src="${doc.data().photoURL}">`);
+ if(doc.data().photoURL !== undefined)  
+ $('.profile_av').html(`<a href="#!/profile/${user.uid}"><div class="av"><div class="avatar myPhoto"><img src="${doc.data().photoURL}"/></div> <div id="my-group"></div></a>`);
+ else
+ $('.profile_av').html(`<a href="#!/profile/${user.uid}"><div class="av"><div class="avatar myPhoto"><img src="${doc.data().photoURL}"/></div> <div id="my-group"></div></a>`);
+
  $('#my-group').text(doc.data().group);
   
  getLatLong(user.uid);
@@ -93,7 +96,7 @@ blood(doc.data(), user.uid);
 });
 
 function navManage(page) {
-    
+
     $('.nav').removeClass('nav-active');
     $('#'+page).addClass('nav-active');
     $('.nav-title').hide();
@@ -111,6 +114,12 @@ function getRelativeTime(date) {
     const dateInMillis  = date.seconds * 1000
     d = new Date(dateInMillis).toDateString() + ' ' + new Date(dateInMillis).toLocaleTimeString()
         return moment(new Date(d)).fromNow();
+    }
+
+    function timestampToDate(date){
+        const dateInMillis  = date.seconds * 1000
+    d = new Date(dateInMillis).toDateString() + ' at ' + new Date(dateInMillis).toLocaleTimeString();
+    return d;
     }
 
 

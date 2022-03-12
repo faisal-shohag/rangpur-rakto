@@ -481,10 +481,69 @@ gap: 10px;
     font-weight: bold;
 }
 
-
-
-
-
 a {
     text-decoration: none;
 }
+
+.profile-top{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+.profile-avatar{
+
+    height: 80px;
+    width: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.profile-avatar img{
+    height: 80px;
+    width: 80px;
+}
+
+.profile-name{
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+
+
+.profile-bio{
+    font-size: 16px;
+}
+
+.profile-body{
+    padding: 20px;
+ display: flex;
+ flex-direction: column;
+ gap: 20px;
+ justify-content: center;
+}
+
+.profile-info-text{
+  font-size: 16px;
+  color: #1f1a35;
+}
+
+.profile-section{
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-info-icon img{
+    height: 30px;
+}
+
+.profile-footer{
+  text-align: center;
+  padding: 30px;
+  font-size: 13px;
+  color: gray;
+}
+
