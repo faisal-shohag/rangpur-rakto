@@ -239,17 +239,17 @@ html {
 }
 
 .post-at{
-    line-height: 15px;
+    line-height: 16px;
 }
 
 .post-author{
     font-weight: bold;
-    font-size: 17px;
+    font-size: 15px;
 
 }
 
 .post-time{
-    font-size: 13px;
+    font-size: 10px;
     color: var(--gray-dark);
 }
 
@@ -267,25 +267,70 @@ html {
 
 .post-contacts{
     display: flex;
-    justify-content: center;
-    gap: 10%;
+    justify-content: space-between;
     font-size: 20px;
-    margin-left: 20px;
-    margin-bottom: 10px;
-    
+    margin-bottom: -5px;
+    padding-left: -10px;
+    padding-right: -10px;
+    border-top: 1px solid rgb(219, 216, 216);
 }
 
-.post-contact-icon{
+.post-contacts a{
     background: white;
-    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    /* box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em; */
     height: 30px;
-    width: 30px;
     padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
+    width: 50%;
+
 }
+
+.post-contacts a:hover{
+    background-color: rgba(197, 183, 183, 0.26);
+}
+
+.post-contacts a:nth-child(1){
+    border-right: 1px solid rgb(216, 206, 206);
+}
+
+.post-foot-area{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.end{
+    display: flex;
+    gap: 20px;
+}
+
+.location{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--gray-dark);
+    margin-bottom: 2px;
+    z-index: 98;
+  margin-top: 10px;
+  }
+  
+  .location img{
+      height: 15px;
+      margin-left: 10px;
+      
+  }
+
+  .icofont-flag{
+      color: #3b2892;
+  }
+
+  .post-body{
+      padding: 10px;
+  }
 
 .tab1 {
     display: flex;
@@ -301,7 +346,6 @@ html {
  display: flex;
  justify-content: center;
  align-items: center;
- cursor: pointer;
  gap: 10px;
  padding: 5px;
  position: relative;
@@ -352,22 +396,7 @@ html {
     font-weight: bold;
 }
 
-.location{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: bold;
-  color: var(--gray-dark);
-  justify-content: center;
-  margin-bottom: 10px;
-  z-index: 98;
-}
 
-.location img{
-    height: 20px;
-    margin-left: 10px;
-    
-}
 
 .donor-avatar{
     height: 30px;

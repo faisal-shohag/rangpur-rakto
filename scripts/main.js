@@ -93,7 +93,7 @@ fstore.collection('recipient').orderBy("creationTime", "desc").onSnapshot(snap=>
 
 ).resolve();
 
-blood(doc.data());
+blood(doc.data(), user.uid);
 
 
 

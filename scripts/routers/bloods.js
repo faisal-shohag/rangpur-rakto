@@ -1,4 +1,4 @@
-function blood(mydata){
+function blood(mydata, uid){
 router.on({
   "/bloods": function (params) {
     navManage("bloods");
@@ -35,8 +35,36 @@ router.on({
         fstore.collection('donor').orderBy("creationTime", "desc").onSnapshot(snap=>{
           tab_body.innerHTML ="";
           snap.forEach(element => {
+            
             let data = element.data();
-            tab_body.innerHTML += `
+            if(uid === data.uid){
+              tab_body.innerHTML += `
+              <div class=" blood-post">
+                  <div class="blood-group"><img src="../../images/group/${data.group}.png"></div>
+                  <div class="donor"><div class="donor-avatar"><img src="../../images/blood-donor-${data.gender}.png"></div>
+                  <div class="post-at">
+                  <div class="post-author">${data.donor}</div>
+                  <div class="post-time">${getRelativeTime(data.creationTime)}</div>
+                  </div></div>
+                  <div class="post-body">${data.details}</div>
+                  <div class="post-foot-area">
+                  <div class="location"><img src="../../images/location.png"> ${data.location}</div>
+                  <div class="end">
+                  <div id="${data.uid}" class="postBy"><i class="icofont-user"></i></div>
+                  <div class="edit"><i class="icofont-edit"></i></div>
+                  <div id="${element.id}" class="delete"><i class="icofont-ui-delete"></i></div>
+                  </div>
+                  </div>
+                  <div class="post-contacts">
+                  <a href="tel:${data.phone}"><div class="post-contact-icon"><i class="icofont-ui-call"></i></div></a>
+                  <a><div class="post-contact-icon"><i class="icofont-flag"></i></div></a>
+                  </div>
+                  </div>
+              `
+
+            
+            }else{
+              tab_body.innerHTML += `
             <div class=" blood-post">
                 <div class="blood-group"><img src="../../images/group/${data.group}.png"></div>
                 <div class="donor"><div class="donor-avatar"><img src="../../images/blood-donor-${data.gender}.png"></div>
@@ -44,13 +72,24 @@ router.on({
                 <div class="post-author">${data.donor}</div>
                 <div class="post-time">${getRelativeTime(data.creationTime)}</div>
                 </div></div>
+                <div class="post-body">${data.details}</div>
+                <div class="post-foot-area">
                 <div class="location"><img src="../../images/location.png"> ${data.location}</div>
+                <div id="${data.uid}" class="postBy"><i class="icofont-user"></i></div>
+                </div>
+               
                 <div class="post-contacts">
-                <a href="tel:${data.phone}"><div class="post-contact-icon"><i class="icofont-ui-call"></i></div></a>
-                <div class="post-contact-icon"><i class="icofont-ui-message"></i></div>
+                <a href="tel:${data.phone}"><div class="post-contact-icon" ><i class="icofont-ui-call"></i></div></a>
+                <a><div class="post-contact-icon"><i class="icofont-flag"></i></div></a>
                 </div>
                 </div>
             `
+            }
+          });
+
+          $('.delete').click(function(){
+            let postId = $(this)[0].id;
+            deletePost(postId);
           });
         })
       } else {
@@ -61,7 +100,32 @@ router.on({
           tab_body.innerHTML =""
           snap.forEach(element => {
             let data = element.data();
-            tab_body.innerHTML += `
+            if(uid === data.uid){
+              tab_body.innerHTML += `
+              <div class=" blood-post">
+                  <div class="blood-group"><img src="../../images/group/${data.group}.png"></div>
+                  <div class="donor"><div class="donor-avatar"><img src="../../images/blood-donor-${data.gender}.png"></div>
+                  <div class="post-at">
+                  <div class="post-author">${data.donor}</div>
+                  <div class="post-time">${getRelativeTime(data.creationTime)}</div>
+                  </div></div>
+                  <div class="post-body">${data.details}</div>
+                  <div class="post-foot-area">
+                  <div class="location"><img src="../../images/location.png"> ${data.location}</div>
+                  <div class="end">
+                  <div id="${data.uid}" class="postBy"><i class="icofont-user"></i></div>
+                  <div class="edit"><i class="icofont-edit"></i></div>
+                  <div id="${element.id}" class="delete"><i class="icofont-ui-delete"></i></div>
+                  </div>
+                  </div>
+                  <div class="post-contacts">
+                  <a href="tel:${data.phone}"><div class="post-contact-icon"><i class="icofont-ui-call"></i></div></a>
+                  <a><div class="post-contact-icon"><i class="icofont-flag"></i></div></a>
+                  </div>
+                  </div>
+              `
+            }else{
+              tab_body.innerHTML += `
             <div class=" blood-post">
                 <div class="blood-group"><img src="../../images/group/${data.group}.png"></div>
                 <div class="donor"><div class="donor-avatar"><img src="../../images/blood-donor-${data.gender}.png"></div>
@@ -69,14 +133,25 @@ router.on({
                 <div class="post-author">${data.donor}</div>
                 <div class="post-time">${getRelativeTime(data.creationTime)}</div>
                 </div></div>
+                <div class="post-body">${data.details}</div>
+                
+                <div class="post-foot-area">
                 <div class="location"><img src="../../images/location.png"> ${data.location}</div>
+                <div id="${data.uid}" class="postBy"><i class="icofont-user"></i></div>
+                </div>
                
                 <div class="post-contacts">
-                <a href="tel:${data.phone}"><div class="post-contact-icon"><i class="icofont-ui-call"></i></div></a>
-                <div class="post-contact-icon"><i class="icofont-ui-message"></i></div>
+                
+                <a href="tel:${data.phone}"><div class="post-contact-icon" ><i class="icofont-ui-call"></i></div></a>
+                <a><div class="post-contact-icon"><i class="icofont-flag"></i></div></a>
                 </div>
                 </div>
             `
+            }
+          });
+          $('.delete').click(function(){
+            let postId = $(this)[0].id;
+            deletePost(postId);
           });
         })
       }
@@ -167,6 +242,7 @@ router.on({
         group: bp.group.value,
         gender: bp.gender.value,
         details: bp.details.value,
+        uid: uid,
         lat: 89.4323907,
         lon: 25.9092413,
         creationTime: firebase.firestore.Timestamp.fromDate(
@@ -559,4 +635,20 @@ router
 
     },
   }).resolve();
+}
+
+function deletePost(postId){
+  console.log(postId);
+  Swal.fire({
+    title: 'পোস্টটি ডিলিট করতে চান?',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'হ্যাঁ',
+    cancelButtonText: `না`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      Swal.fire('ডিলিট হয়েছে!', '', 'success')
+    } 
+  })
 }
