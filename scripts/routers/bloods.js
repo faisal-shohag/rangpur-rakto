@@ -1,6 +1,7 @@
 function blood(mydata, uid){
 router.on({
   "/bloods": function (params) {
+    $('#appBarTitle').text('রক্ত');
     navManage("bloods");
     app.innerHTML = `
         <div class="tab1">
@@ -39,7 +40,7 @@ router.on({
             let data = element.data();
             if(uid === data.uid){
               tab_body.innerHTML += `
-              <div class=" blood-post">
+              <div class="blood-post">
                   <div class="blood-group"><img src="../../images/group/${data.group}.png"></div>
                   <div class="donor"><div class="donor-avatar"><img src="../../images/blood-donor-${data.gender}.png"></div>
                   <div class="post-at">
@@ -50,8 +51,8 @@ router.on({
                   <div class="post-foot-area">
                   <div class="location"><img src="../../images/location.png"> ${data.location}</div>
                   <div class="end">
-                  <div id="${data.uid}" class="postBy"><i class="icofont-user"></i></div>
-                  <div class="edit"><i class="icofont-edit"></i></div>
+                  <a href="#!/profile/${data.uid}"><div class="postBy"><i class="icofont-user"></i></div></a>
+                  <a href="#!/edit/donor/${element.id}"><div class="edit"><i class="icofont-edit"></i></div></a>
                   <div id="${element.id}" class="delete"><i class="icofont-ui-delete"></i></div>
                   </div>
                   </div>
@@ -89,8 +90,9 @@ router.on({
 
           $('.delete').click(function(){
             let postId = $(this)[0].id;
-            deletePost(postId);
+            deletePost(postId, "donor");
           });
+          
         })
       } else {
         $("#" + id).addClass("tab-active");
@@ -113,8 +115,8 @@ router.on({
                   <div class="post-foot-area">
                   <div class="location"><img src="../../images/location.png"> ${data.location}</div>
                   <div class="end">
-                  <div id="${data.uid}" class="postBy"><i class="icofont-user"></i></div>
-                  <div class="edit"><i class="icofont-edit"></i></div>
+                  <a href="#!/profile/${data.uid}"><div class="postBy"><i class="icofont-user"></i></div></a>
+                  <a href="#!/edit/recipient/${element.id}"><div class="edit"><i class="icofont-edit"></i></div></a>
                   <div id="${element.id}" class="delete"><i class="icofont-ui-delete"></i></div>
                   </div>
                   </div>
@@ -134,7 +136,7 @@ router.on({
                 <div class="post-time">${getRelativeTime(data.creationTime)}</div>
                 </div></div>
                 <div class="post-body">${data.details}</div>
-                
+
                 <div class="post-foot-area">
                 <div class="location"><img src="../../images/location.png"> ${data.location}</div>
                 <div id="${data.uid}" class="postBy"><i class="icofont-user"></i></div>
@@ -151,13 +153,15 @@ router.on({
           });
           $('.delete').click(function(){
             let postId = $(this)[0].id;
-            deletePost(postId);
+            deletePost(postId, "recipient");
           });
         })
       }
     });
   },
+
   "/post": function (params) {
+    $('#appBarTitle').text('পোস্ট');
     navManage("post");
     app.innerHTML = `
 <div class="container">
@@ -258,8 +262,9 @@ router.on({
       bp.reset();
     });
   },
-  "/notify": function (params) {
-    navManage("notify");
+  "/search": function (params) {
+    $('#appBarTitle').text('সার্চ');
+    navManage("search");
     app.innerHTML = `
         <div class="tab-body">
         
@@ -291,6 +296,7 @@ router.on({
 router
   .on({
     "/auth": function () {
+      $('#appBarTitle').text('সাইন ইন');
       $(".appBar").hide();
       $(".loader").hide();
       $(".bottom-nav").hide();
@@ -635,9 +641,128 @@ router
 
     },
   }).resolve();
+  
+
+  router.on({
+    "edit/:id/:id2": function (params) {
+      $('#appBarTitle').text('পোস্ট এডিট');
+      app.innerHTML = `
+  <div class="container">
+  <form id="blood-post">
+    <div class="row">
+      <h4>দাতা বা গ্রহীতার বিবরণ </h4>
+  
+      <div class="input-group input-group-icon">
+        <input name="name" type="text" placeholder="নাম" required/>
+        <div class="input-icon"><i class="icofont-user"></i></div>
+      </div>
+  
+      <div class="input-group input-group-icon">
+        <input name="phone" type="number" placeholder="সঠিক ফোন নম্বর" required/>
+        <div class="input-icon"><i class="icofont-ui-call"></i></div>
+      </div>
+  
+      <div class="input-group input-group-icon">
+        <input name="location" type="text" placeholder="পূর্ণ ঠিকানা(বর্তমান)" required/>
+        <div class="input-icon"><i class="icofont-location-pin"></i></div>
+      </div>
+  
+    </div>
+  
+  
+    <div class="row">
+  
+      <div class="col-half">
+        <h4>একটি ঠিক করুন</h4>
+        <div class="input-group">
+          <input id="dnr" type="radio" name="status" value="donor" required/>
+          <label for="dnr">রক্ত দিতে চাই</label>
+          <input id="rcp" type="radio" name="status" value="recipient" required/>
+          <label for="rcp">রক্ত নিতে চাই</label>
+        </div>
+      </div>
+    </div>
+  
+    <h4>জেন্ডার নির্ধারণ করুন</h4>
+    <div class="input-group">
+      <input id="gender-male" type="radio" name="gender" value="male" required/>
+      <label for="gender-male">পুরুষ</label>
+      <input id="gender-female" type="radio" name="gender" value="female" required/>
+      <label for="gender-female">নারী</label>
+      <input id="gender-female" type="radio" name="gender" value="other" required/>
+      <label for="gender-female">অন্যান্য</label>
+    </div>
+  
+    <h4>যে রক্তের গ্রুপ দিতে চান বা নিতে চান</h4>
+    <div class="input-group">
+  
+            <select name="group" required>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              
+            </select>
+  
+          </div>
+      
+          <h4>বিস্তারিত লিখুন</h4>
+          <div class="input-group">
+           <textarea maxlength="200" name="details" placeholder="২০০ বর্ণের  মধ্যে" required></textarea>
+          </div>
+    <center> <button type="submit">সবমিট করুন</div></center>
+  </form>
+  </div>
+          `;
+        const bp = document.querySelector("#blood-post");
+  
+      fstore.collection(params.id).doc(params.id2).onSnapshot(snap=>{
+        let data = snap.data();
+        bp.name.value = data.donor;
+        bp.phone.value = data.phone;
+        bp.location.value = data.location;
+        bp.group.value = data.group;
+        bp.gender.value = data.gender;
+        bp.details.value = data.details;
+        bp.status.value = params.id;
+      })
+
+    
+      bp.addEventListener("submit", (e) => {
+        e.preventDefault();
+         fstore.collection(bp.status.value).doc(params.id2).update({
+          donor: bp.name.value,
+          phone: bp.phone.value,
+          location: bp.location.value,
+          group: bp.group.value,
+          gender: bp.gender.value,
+          details: bp.details.value,
+          uid: uid,
+          lat: 89.4323907,
+          lon: 25.9092413,
+          creationTime: firebase.firestore.Timestamp.fromDate(
+            new Date())
+         });
+  
+         Swal.fire({
+          icon: 'success',
+          title: 'সম্পন্ন হয়েছে!',
+          text: 'আপনার পোস্টটি পাবলিশ হয়েছে!',
+        });
+  
+        bp.reset();
+      });
+    },
+  }).resolve();
+
+  
 }
 
-function deletePost(postId){
+function deletePost(postId, postCollection){
   console.log(postId);
   Swal.fire({
     title: 'পোস্টটি ডিলিট করতে চান?',
@@ -648,6 +773,7 @@ function deletePost(postId){
   }).then((result) => {
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
+      fstore.collection(postCollection).doc(postId).delete();
       Swal.fire('ডিলিট হয়েছে!', '', 'success')
     } 
   })
