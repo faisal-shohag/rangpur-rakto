@@ -81,10 +81,10 @@ html {
       font-family: Hind Siliguri;
       font-weight: bold;
       font-size: 30px;
-      background: -webkit-linear-gradient(45deg, rgb(211, 55, 34), rgb(172, 18, 102));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0px 1px 5px rgb(0 0 0 / 20%);
+       background: -webkit-linear-gradient(45deg, rgb(211, 55, 34), rgb(172, 18, 102));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px 1px 5px rgb(0 0 0 / 20%);
   }
 
   .sec-horz{
@@ -668,3 +668,31 @@ a {
     background: rgb(241, 239, 239);
 }
 
+.member{
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.member-avatar img{
+ height: 40px;
+ width: 40px;
+}
+.member-avatar{
+height: 40px;
+ width: 40px;
+ overflow: hidden;
+ border-radius: 50%;
+}
+
+.member-list .card{
+    margin: 10px;
+}
+
+.member-list a{
+    color: #000;
+}
+
+.member-name{
+    font-weight: bold;
+}

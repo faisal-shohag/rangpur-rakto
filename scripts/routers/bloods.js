@@ -134,8 +134,10 @@ router.on({
                   </div>
                   </div>
                   <div class="post-contacts">
+                 
                   <a href="tel:${data.phone}"><div class="post-contact-icon"><i class="icofont-ui-call"></i></div></a>
-                  <a><div class="post-contact-icon"><i class="icofont-flag"></i></div></a>
+                  <a href="#"><div class="post-contact-icon"><i class="icofont-flag"></i></div></a>
+                  
                   </div>
                   </div>
               `
@@ -303,19 +305,60 @@ router.on({
       bp.reset();
     });
   },
-  "/search": function (params) {
-    $('#appBarTitle').text('সার্চ');
-    navManage("search");
-    app.innerHTML = `
-        <div class="search_bar">
-        <input id="search-input" type="text" name="search"/>
-        </div>
-        `;
 
-        
+  "/members": function (params) {
+    $('#appBarTitle').text('মেম্বারস');
+    navManage("members");
+    app.innerHTML = `
+    <div class="search-bar">
+    <div class="search-icon"><img src="../../images/search.png"></div>
+    <input autocomplete="off" id="search-member" placeholder="সদস্য সার্চ করুন..." type="text" name="search"/>
+    </div>
+
+    <div class="member-list">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    </div>
+        `;
+        const member_list = document.querySelector('.member-list');
+        fstore.collection('users').onSnapshot(snap => {
+          member_list.innerHTML = "";
+          snap.forEach(member => {
+            member_list.innerHTML += `
+            <a href="#!/profile/${member.id}"><div class="card">
+            <div class="member">
+            <div class="member-avatar"><img src="${member.data().photoURL}"></div>
+            <div class="member-nb">
+            <div class="member-name">${member.data().name}</div>
+            <div class="member-group">${member.data().group}</div>
+            </div>
+            </div>
+            </div></a>
+            `
+          });
+
+          document.getElementById('search-member').addEventListener('keyup', e=>{
+            if(e.key = 'Enter'){
+              e.preventDefault();
+              let filter = ($('#search-member')[0].value).toUpperCase();
+              let allPost = document.querySelectorAll('.member-name');
+              for(let i=0; i<allPost.length; i++){
+                tag = allPost[i].innerText;
+                if(tag.indexOf(filter) > -1) {
+                  allPost[i].parentNode.parentNode.parentNode.style.display = "";
+                } else{
+                  allPost[i].parentNode.parentNode.parentNode.style.display = "none";
+                }
+  
+              }
+            }
+          });
+
+        })
   },
 });
 
+
+//Profile Info Update
 router
   .on({
     "/info/:id": function (params) {
@@ -543,6 +586,105 @@ router
 
 
     },
+
+    "/photo_upload": function(){
+    app.innerHTML = `
+    <div class="wrapper">
+    <div class="file-upload">
+      <input type="file" id="imgInp" />
+      <i class="icofont-camera"></i>
+    </div>
+    </div>
+    <div>
+    <div class="image">
+    <img id="image" src="../../images/blood.png" alt="Picture">
+    </div>
+  </div>
+  <h3>Result</h3>
+  <p>
+    <button type="button" id="button">Crop</button>
+  </p>
+  <div id="result"></div>
+</div>
+    `
+
+    const imgInp = document.querySelector("#imgInp");
+      imgInp.onchange = (evt) => {
+        let [file] = imgInp.files;
+        if (file) {
+          let url = URL.createObjectURL(file);
+          console.log(url);
+          $(".image").html(`<img id="image" src="${url}" alt="Picture">`);
+      
+    function getRoundedCanvas(sourceCanvas) {
+      var canvas = document.createElement('canvas');
+      var context = canvas.getContext('2d');
+      var width = sourceCanvas.width;
+      var height = sourceCanvas.height;
+
+      canvas.width = width;
+      canvas.height = height;
+      context.imageSmoothingEnabled = true;
+      context.drawImage(sourceCanvas, 0, 0, width, height);
+      context.globalCompositeOperation = 'destination-in';
+      context.beginPath();
+      context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI, true);
+      context.fill();
+      return canvas;
+    }
+
+      var image = document.getElementById('image');
+      var button = document.getElementById('button');
+      var result = document.getElementById('result');
+      var croppable = false;
+      var cropper = new Cropper(image, {
+        aspectRatio: 1,
+        viewMode: 1,
+        ready: function () {
+          croppable = true;
+        },
+      });
+
+      button.onclick = function () {
+        var croppedCanvas;
+        var roundedCanvas;
+        var roundedImage;
+
+        if (!croppable) {
+          return;
+        }
+
+        // Crop
+        croppedCanvas = cropper.getCroppedCanvas();
+
+        // Round
+        roundedCanvas = getRoundedCanvas(croppedCanvas);
+         
+        let blob = dataURItoBlob(roundedCanvas.toDataURL('image/jpeg', 0.5));
+        let fd = new FormData();
+        let myfile = new File([blob], 'myImage.jpg', {type: 'image/jpeg'});
+        fd.append('myImage', myfile);
+        console.log(fd);
+        console.log(myfile); 
+
+        storage
+            .ref()
+            .child("profile/" + "myphoto")
+            .put(myfile)
+
+        console.log(roundedCanvas);
+        // Show
+        roundedImage = document.createElement('img');
+        roundedImage.src = roundedCanvas.toDataURL()
+        result.innerHTML = '';
+        result.appendChild(roundedImage);
+      };
+    
+    }
+  }
+
+    }
+
   }).resolve();
   
 
@@ -718,7 +860,7 @@ router
           .auth()
           .signOut()
           .then(() => {
-            window.location.reload();
+            // window.location.reload();
           })
           .catch((e) => {
             console.log(e);
@@ -838,7 +980,10 @@ router.on({
           $(".varify").show();
 
           signInWithPhoneButton.addEventListener("click", () =>
-            signInWithPhone(sentCodeId)
+           { 
+             $('.loader').show();
+             signInWithPhone(sentCodeId)
+            }
           );
         });
     };

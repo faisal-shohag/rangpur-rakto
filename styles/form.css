@@ -353,3 +353,19 @@ h4 {
     transform: rotate(360deg);
   }
 }
+
+.cropper-view-box,
+.cropper-face {
+  border-radius: 50%;
+}
+
+#result{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#result img{
+  height: 100px;
+  width: 100px;
+}

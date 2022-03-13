@@ -18,12 +18,12 @@ const nav_data = [
         link: '/post'
     },
 
-    // {
-    //     title: 'সার্চ',
-    //     id: 'search',
-    //     icon: '<i class="icofont-search-1"></i>',
-    //     link: '/search'
-    // },
+    {
+        title: 'মেম্বারস',
+        id: 'members',
+        icon: '<i class="icofont-users-social"></i>',
+        link: '/members'
+    },
 
 ]
 const bottom_nav = document.querySelector('.bottom-nav');
