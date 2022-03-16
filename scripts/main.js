@@ -12,6 +12,7 @@ firebase.auth().onAuthStateChanged((user) => {
           $(".av").hide();
           router.navigate("/info/" + user.uid);
           $(".loader").hide();
+          blood(doc.data(), user.uid);
         } else {
           router.navigate("/");
           $(".loader").hide();
