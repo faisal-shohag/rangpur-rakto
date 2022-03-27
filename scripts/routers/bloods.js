@@ -344,6 +344,7 @@ router.on({
               let allPost = document.querySelectorAll('.member-name');
               for(let i=0; i<allPost.length; i++){
                 tag = allPost[i].innerText;
+                tag = tag.toUpperCase();
                 if(tag.indexOf(filter) > -1) {
                   allPost[i].parentNode.parentNode.parentNode.style.display = "";
                 } else{
