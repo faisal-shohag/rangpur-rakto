@@ -16,6 +16,7 @@ firebase.auth().onAuthStateChanged((user) => {
         } else {
           router.navigate("/");
           $(".loader").hide();
+          $(".bottom-nav").show();
           $(".av").show();
           if (doc.data().photoURL !== undefined)
             $(".profile_av").html(
