@@ -320,7 +320,7 @@ router.on({
     </div>
         `;
         const member_list = document.querySelector('.member-list');
-        fstore.collection('users').onSnapshot(snap => {
+        fstore.collection('users').get().then(snap => {
           member_list.innerHTML = "";
           
           snap.forEach(member => {
@@ -854,25 +854,25 @@ router
       <div class="profile-footer"><b>Joined </b>${timestampToDate(data.creationTime)}</div>
       `
 
-      // if(params.id === uid){
-      //   document.querySelector('.le').innerHTML = `
-      //   <div id="logout" class="profile-button"><i class="icofont-logout"></i></div>
-      //   <a href="#!/info/${uid}"><div class="profile-button"><i class="icofont-edit"></i></div></a>
-      //   `
-      //   $('#logout').off().click(function(){
-      //     firebase
-      //     .auth()
-      //     .signOut()
-      //     .then(() => {
-      //       // window.location.reload();
-      //     })
-      //     .catch((e) => {
-      //       console.log(e);
-      //     });
-      //   })
+      if(params.id === uid){
+        document.querySelector('.le').innerHTML = `
+        <div id="logout" class="profile-button"><i class="icofont-logout"></i></div>
+        <a href="#!/info/${uid}"><div class="profile-button"><i class="icofont-edit"></i></div></a>
+        `
+        $('#logout').off().click(function(){
+          firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            // window.location.reload();
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+        })
 
 
-      // }
+      }
 
     })
     }

@@ -14,7 +14,7 @@ firebase.auth().onAuthStateChanged((user) => {
           $(".loader").hide();
           blood(doc.data(), user.uid);
         } else {
-          router.navigate("/");
+          // router.navigate("/");
           $(".loader").hide();
           $(".bottom-nav").show();
           $(".av").show();
@@ -37,7 +37,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
           $("#my-group").text(doc.data().group);
 
-          getLatLong(user.uid);
+          // getLatLong(user.uid);
           router
             .on({
               "/": function (params) {
