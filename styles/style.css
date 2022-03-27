@@ -55,7 +55,7 @@ html {
     margin-top: 60px;
     border-radius: 10px;
     position:relative;
-    height: 100vh;
+    /* height: 100vh; */
   }
 
   .screen{
