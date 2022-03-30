@@ -680,6 +680,7 @@ firebase.auth().onAuthStateChanged((user) => {
             
             
               },
+             
               "/photo_upload": function(){
               app.innerHTML = `
               <div class="wrapper">
@@ -1264,10 +1265,10 @@ firebase.auth().onAuthStateChanged((user) => {
                 <div class="profile-footer"><b>Joined </b>${timestampToDate(data.creationTime)}</div>
                 `
             
-                if(params.id === uid){
+                if(params.id === user.uid){
                   document.querySelector('.le').innerHTML = `
                   <div id="logout" class="profile-button"><i class="icofont-logout"></i></div>
-                  <a href="#!/info/${uid}"><div class="profile-button"><i class="icofont-edit"></i></div></a>
+                  <a href="#!/info/${user.uid}"><div class="profile-button"><i class="icofont-edit"></i></div></a>
                   `
                   $('#logout').off().click(function(){
                     firebase

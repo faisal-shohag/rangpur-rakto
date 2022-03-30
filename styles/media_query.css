@@ -18,6 +18,12 @@
         align-items: center;
     }
 
+    .bottom-nav .nav-active{
+        color: #fff;
+        background: red;
+        width: 100%;
+    }
+
     .post-contacts{
       gap: 30%;
 
