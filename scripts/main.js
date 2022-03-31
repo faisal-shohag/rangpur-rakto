@@ -110,10 +110,37 @@ firebase.auth().onAuthStateChanged((user) => {
 
 
                   <div class="em-card">
-                  <div class="em-title">Bangladesh Red Crescent Society</div>
+                  <div class="em-title">Badhon, BRUR Branch</div>
                   <div class="em-contact"><img src="../images/phone.png"> +880-2-8319366, 9330188, 9330189, 935410399, 8314701, 9352226</div>
-                  <div class="em-addr"><img src="../images/location.png"> National Headquarters, 684-686, Bara Maghbazar, Dhaka- 1217, Bangladesh</div>
+                  <div class="em-addr"><img src="../images/location.png"> BRUR, Rangpur</div>
                   </div>
+
+                  <div class="em-card">
+                  <div class="em-title">TPI Blood Donate Foundation-Rangpur</div>
+                  <div class="em-contact"><img src="../images/phone.png"> +8801796-080374</div>
+                  <div class="em-addr"><img src="../images/location.png"> Darshana, Rangpur</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Student Welfare Organization of Bangladesh (SWOB)</div>
+                  <div class="em-contact"><img src="../images/phone.png"> 01704-260771</div>
+                  <div class="em-addr"><img src="../images/location.png">  Kurigram-Ulipur-Chilmari Road, Ulipur</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Begum Tayeeba Mojumder Red Crescent Blood Center</div>
+                  <div class="em-contact"><img src="../images/phone.png"> 0531 61300, 01723 595972, 01717 184539</div>
+                  <div class="em-addr"><img src="../images/location.png"> 1 New Town, Dinajpur</div>
+                  </div>
+
+
+                  <div class="em-card">
+                  <div class="em-title">Rajshahi Red Crescent Blood Center</div>
+                  <div class="em-contact"><img src="../images/phone.png"> 01794565654</div>
+                  <div class="em-addr"><img src="../images/location.png"> Sandhani Eye Hospital, Dhaka</div>
+                  </div>
+
+
 
                   </div>
                   `
@@ -137,6 +164,42 @@ firebase.auth().onAuthStateChanged((user) => {
                   <div class="em-addr"><img src="../images/location.png"> 1/1 Pioneer Road (Ground Floor); Segunbagicha, Dhaka- 1000, Bangladesh</div>
                   </div>
 
+                  <div class="em-card">
+                  <div class="em-title">Thalassemia Foundation Hospital</div>
+                  <div class="em-contact"><img src="../images/phone.png"> +88-02-8332481, 01755-587479</div>
+                  <div class="em-addr"><img src="../images/location.png"> Dhaka- 1207, Bangladesh</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Bloodseek.com</div>
+                  <div class="em-contact"><img src="../images/phone.png">+88-01716-057020</div>
+                  <div class="em-addr"><img src="../images/location.png">Dhaka- 1207, Bangladesh</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Bangladesh Blood Bank & Transfiution Center</div>
+                  <div class="em-contact"><img src="../images/phone.png">+88-01776-291633, 01850-077185</div>
+                  <div class="em-addr"><img src="../images/location.png">22/12, 1st Floor, Mirpur Road, Dhaka- 1207, Bangladesh</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">BADHAN</div>
+                  <div class="em-contact"><img src="../images/phone.png">+88-02-8629042, 01534-982674</div>
+                  <div class="em-addr"><img src="../images/location.png">: Central Office, T.S.C (Ground Floor), University of Dhaka, Dhaka- 1000, Bangladesh</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Bangladesh Red Crescent Blood Bank</div>
+                  <div class="em-contact"><img src="../images/phone.png">+8802-8121497</div>
+                  <div class="em-addr"><img src="../images/location.png">7/5, Aurongzeb Road, Dhaka- 1207, Bangladesh</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Voluntary Blood Donation Program and Quantum Lab</div>
+                  <div class="em-contact"><img src="../images/phone.png">+8802-8322987</div>
+                  <div class="em-addr"><img src="../images/location.png">31/V Shilpacharya Zainul Abedin Sarak, Shantinagar, Dhaka- 1217, Bangladesh</div>
+                  </div>
+
                   </div>
                   `
                 }
@@ -144,14 +207,121 @@ firebase.auth().onAuthStateChanged((user) => {
                 if(params.id == "ox"){
                   $('#appBarTitle').text('অক্সিজেন');
                   app.innerHTML = `
-                  ox
+                  <div class="em">
+
+                  <div class="em-card">
+                  <div class="em-title">Marium Oxygen</div>
+                  <div class="em-contact"><img src="../images/phone.png"> +8801714558407</div>
+                  <div class="em-addr"><img src="../images/location.png"> https://mariumoxygen.com/</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">71care</div>
+                  <div class="em-contact"><img src="../images/phone.png">01401-444888</div>
+                  <div class="em-addr"><img src="../images/location.png"> https://71care.com/oxygen-cylinder-bd/</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Prova Oxygen</div>
+                  <div class="em-contact"><img src="../images/phone.png"> +8801716961897</div>
+                  <div class="em-addr"><img src="../images/location.png"> https://provaoxygen.xyz/</div>
+                  </div>
+                  
+                  <div class="em-card">
+                  <div class="em-title">Maisha Care LTD</div>
+                  <div class="em-contact"><img src="../images/phone.png"> +8801315092095</div>
+                  <div class="em-addr"><img src="../images/location.png">https://maishacare.com/product-category/oxygen-cylinder/</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Oxygen Delivery24</div>
+                  <div class="em-contact"><img src="../images/phone.png">+8801718967976, +8801730116203</div>
+                  <div class="em-addr"><img src="../images/location.png"> https://oxygendelivery24.com/</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Oxygen Cylinder BD</div>
+                  <div class="em-contact"><img src="../images/phone.png"> 01714585817</div>
+                  <div class="em-addr"><img src="../images/location.png"> https://www.oxygencylinderbd.com/</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Oxygen Dhaka</div>
+                  <div class="em-contact"><img src="../images/phone.png"> 01725554233</div>
+                  <div class="em-addr"><img src="../images/location.png"> https://www.oxygendhaka.com/</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Medishop BD</div>
+                  <div class="em-contact"><img src="../images/phone.png"> +8801795228222</div>
+                  <div class="em-addr"><img src="../images/location.png"> https://medishop.com.bd/</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Oxygen Cylinder Home Service</div>
+                  <div class="em-contact"><img src="../images/phone.png"> +8801716089838</div>
+                  <div class="em-addr"><img src="../images/location.png"> https://oxygencylinderhomeservice.com.bd/</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Peace Oxygen</div>
+                  <div class="em-contact"><img src="../images/phone.png"> +8801719677350</div>
+                  <div class="em-addr"><img src="../images/location.png"> https://peaceoxygen.com/</div>
+                  </div>
+                  </div>
+                  
                   `
                 }
 
                 if(params.id == "amb"){
                   $('#appBarTitle').text('অ্যাম্বুলেন্স');
                   app.innerHTML = `
-                  amb
+                  <div class="em">
+
+
+                  <div class="em-card">
+                  <div class="em-title">Rangpur BP Ambulance Service</div>
+                  <div class="em-contact"><img src="../images/phone.png">01715-773382</div>
+                  <div class="em-addr"><img src="../images/location.png"> Rangpur City</div>
+                  </div>
+
+
+                  <div class="em-card">
+                  <div class="em-title">LABAID Diagnostic Rangpur</div>
+                  <div class="em-contact"><img src="../images/phone.png">01766-663099</div>
+                  <div class="em-addr"><img src="../images/location.png">  Setu Bandhan, House-69, Road, 01 Rangpur – Dinajpur Hwy, Rangpur 5400</div>
+                  </div>
+
+
+                  <div class="em-card">
+                  <div class="em-title">City Clinic Ambulance Service</div>
+                  <div class="em-contact"><img src="../images/phone.png">0531 65481, 01712816234.</div>
+                  <div class="em-addr"><img src="../images/location.png"> Dinajpur</div>
+                  </div>
+
+
+                  <div class="em-card">
+                  <div class="em-title">Doctors Hospital Ambulance Service</div>
+                  <div class="em-contact"><img src="../images/phone.png">01716991273</div>
+                  <div class="em-addr"><img src="../images/location.png"> Dinajpur</div>
+                  </div>
+
+
+
+                  <div class="em-card">
+                  <div class="em-title">Doctors Clinic Unit 1 Ambulance Service</div>
+                  <div class="em-contact"><img src="../images/phone.png">051 61074</div>
+                  <div class="em-addr"><img src="../images/location.png"> Bogra</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Doctors Clinic Unit 2 Ambulance Service</div>
+                  <div class="em-contact"><img src="../images/phone.png">051 66224</div>
+                  <div class="em-addr"><img src="../images/location.png"> Bogra</div>
+                  </div>
+
+
+                  </div>
                   `
                 }
 
