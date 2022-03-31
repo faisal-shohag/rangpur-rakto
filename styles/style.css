@@ -618,7 +618,7 @@ a {
 }
 
 .menu-item{
-    width: 40%;
+    width: 130px;
  display: flex;
  flex-direction: column;
  align-items: center;
@@ -695,4 +695,43 @@ height: 40px;
 
 .member-name{
     font-weight: bold;
+}
+
+.em{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.em img{
+    height: 20px;
+}
+
+.em-card{
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    padding: 5px;
+    border-radius: 5px;
+    
+}
+
+.em-title{
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.em-contact, .em-addr{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.em-addr{
+    font-size: 13px;
+    color: rgb(65, 61, 61);
 }

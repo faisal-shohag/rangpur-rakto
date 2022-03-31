@@ -63,27 +63,28 @@ firebase.auth().onAuthStateChanged((user) => {
 
        <div class="menu">
 
-       <div class="menu-item">
+       <a href="#!/emergency/org"><div class="menu-item">
        <div class="menu-icon"><img src="../images/blood-organization.png"></div>
        <div class="menu-title">সংগঠন</div>
-       </div>
+       </div></a>
 
 
-       <div class="menu-item">
+       <a href="#!/emergency/bb"><div class="menu-item">
        <div class="menu-icon"><img src="../images/blood-bank.png"></div>
        <div class="menu-title">ব্লাড ব্যাংক</div>
-       </div>
+       </div></a>
 
        
-       <div class="menu-item">
+       <a href="#!/emergency/ox"><div class="menu-item">
        <div class="menu-icon"><img src="../images/oxygen-tank.png"></div>
        <div class="menu-title">অক্সিজেন</div>
-       </div>
+       </div></a>
 
-       <div class="menu-item">
+       <a href="#!/emergency/amb"><div class="menu-item">
        <div class="menu-icon"><img src="../images//ambulance.png"></div>
        <div class="menu-title">অ্যাম্বুলেন্স</div>
-       </div>
+       </div></a>
+
        </div>
 `;
                 fstore
@@ -99,7 +100,65 @@ firebase.auth().onAuthStateChanged((user) => {
                     $(".rec-count").text(snap.docs.length + " জন");
                   });
               },
-              "/bloods": function (params) {
+              "/emergency/:id": function(params){
+                $('#appBarTitle').text('রক্ত');
+               
+                if(params.id === "org"){
+                  $('#appBarTitle').text('সংগঠন');
+                  app.innerHTML = `
+                  <div class="em">
+
+
+                  <div class="em-card">
+                  <div class="em-title">Bangladesh Red Crescent Society</div>
+                  <div class="em-contact"><img src="../images/phone.png"> +880-2-8319366, 9330188, 9330189, 935410399, 8314701, 9352226</div>
+                  <div class="em-addr"><img src="../images/location.png"> National Headquarters, 684-686, Bara Maghbazar, Dhaka- 1217, Bangladesh</div>
+                  </div>
+
+                  </div>
+                  `
+                }
+
+                if(params.id == "bb"){
+                  $('#appBarTitle').text('ব্লাড ব্যাংক');
+                  app.innerHTML = `
+                  <div class="em">
+
+
+                  <div class="em-card">
+                  <div class="em-title">Bangladesh Red Crescent Society</div>
+                  <div class="em-contact"><img src="../images/phone.png"> +880-2-8319366, 9330188, 9330189, 935410399, 8314701, 9352226</div>
+                  <div class="em-addr"><img src="../images/location.png"> National Headquarters, 684-686, Bara Maghbazar, Dhaka- 1217, Bangladesh</div>
+                  </div>
+
+                  <div class="em-card">
+                  <div class="em-title">Quantum Blood Bank</div>
+                  <div class="em-contact"><img src="../images/phone.png"> +88-02-9355756,</div>
+                  <div class="em-addr"><img src="../images/location.png"> 1/1 Pioneer Road (Ground Floor); Segunbagicha, Dhaka- 1000, Bangladesh</div>
+                  </div>
+
+                  </div>
+                  `
+                }
+
+                if(params.id == "ox"){
+                  $('#appBarTitle').text('অক্সিজেন');
+                  app.innerHTML = `
+                  ox
+                  `
+                }
+
+                if(params.id == "amb"){
+                  $('#appBarTitle').text('অ্যাম্বুলেন্স');
+                  app.innerHTML = `
+                  amb
+                  `
+                }
+
+
+               
+              },
+              "/bloods": function (params) {            
                 $('#appBarTitle').text('রক্ত');
                 navManage("bloods");
                 app.innerHTML = `
@@ -454,427 +513,6 @@ firebase.auth().onAuthStateChanged((user) => {
             
                     })
               },
-              "/info/:id": function (params) {
-                $('#appBarTitle').text('প্রোফাইল আপডেট');
-                app.innerHTML = `
-                <div class="container">
-                <center><div class="avatar"></div>
-              
-                <h4>প্রোফাইল ফটো আপলোড করুন</h4>
-                <div class="uploadProgress"></div>
-                <div class="wrapper">
-            <div class="file-upload">
-            <input type="file" id="imgInp" />
-            <i class="icofont-camera"></i>
-            </div>
-            </div>
-            <button id="upload">আপলোড</button>
-                </center>
-            
-            
-              <form id="user-info">
-                <div class="row">
-              <h4>আপনার তথ্য দিন</h4>
-              <div class="input-group input-group-icon">
-                <input name="name" type="text" placeholder="নাম" required/>
-                <div class="input-icon"><i class="icofont-user"></i></div>
-              </div>
-            
-            
-              <div class="input-group input-group-icon">
-                <input name="location" type="text" placeholder="পূর্ণ ঠিকানা(বর্তমান)" required/>
-                <div class="input-icon"><i class="icofont-location-pin"></i></div>
-              </div>
-            
-            </div>
-            
-            
-            <div class="row">
-            
-              <div class="col-half">
-                <h4>আপনার জেন্ডার নির্ধারণ করুন</h4>
-                <div class="input-group">
-                  <input id="gender-male" type="radio" name="gender" value="male" required/>
-                  <label for="gender-male">পুরুষ</label>
-                  <input id="gender-female" type="radio" name="gender" value="female" required/>
-                  <label for="gender-female">নারী</label>
-                  <input id="gender-female" type="radio" name="gender" value="other" required/>
-                  <label for="gender-female">অন্যান্য</label>
-                </div>
-              </div>
-            </div>
-            
-            <h4>এর আগে রক্ত দান করেছিলেন?</h4>
-            <div class="input-group">
-                  <input id="yes" type="radio" name="donate_status" value="yes" required/>
-                  <label for="yes">হ্যাঁ</label>
-                  <input id="no" type="radio" name="donate_status" value="no" required/>
-                  <label for="no">না</label>
-                </div>
-            
-            <div class="donate-date">
-            <h4>সর্বশেষ রক্তদানের তারিখ</h4>
-            <input type="date" id="meeting-time"
-                 name="donate_date">
-              </div>
-            
-            <h4>আপনার রক্তের গ্রুপ</h4>
-            <div class="input-group">
-                    <select name="group" required>
-                      <option value="A+">A+</option>
-                      <option value="A-">A-</option>
-                      <option value="B+">B+</option>
-                      <option value="B-">B-</option>
-                      <option value="AB+">AB+</option>
-                      <option value="AB-">AB-</option>
-                      <option value="O+">O+</option>
-                      <option value="O-">O-</option>
-                      
-                    </select>
-            
-                  </div>
-              
-                  <h4>বায়ো</h4>
-                  <div class="input-group">
-                   <textarea maxlength="250" name="details" placeholder="২৫০ বর্ণের  মধ্যে" required></textarea>
-                  </div>
-            <center> <button type="submit">সবমিট করুন</div></center>
-            </form>
-            </div>
-                `;
-                const userInfo = document.getElementById('user-info');
-            
-                fstore.collection('users').doc(params.id).onSnapshot(snap=>{
-                  let data = snap.data();
-                  
-                  if(data.name !== undefined){
-                    $(".avatar").html(`<img src="${data.photoURL}" />`);
-                    
-                    let isDonor = "no";
-                    if(data.isDonor == true){ 
-                      isDonor = "yes";
-                      $('.donate-date').show()
-                  }
-                    userInfo.name.value = data.name;
-                    userInfo.location.value = data.location;
-                    userInfo.gender.value = data.gender;
-                    userInfo.donate_date.value = data.donate_date;
-                    userInfo.group.value = data.group;
-                    userInfo.details.value = data.details;
-                    userInfo.donate_status.value = isDonor;
-                  }
-                  if(data.photoURL == undefined){
-                    fstore.collection('users').doc(params.id).update({
-                      photoURL: "https://firebasestorage.googleapis.com/v0/b/rangpur-rakto.appspot.com/o/profile%2Fuser.png?alt=media&token=d71fdf2e-95f9-4863-a003-979f765cc736",
-                    })
-                  }
-            
-                })
-            
-                $('#yes').click(
-                 function(){
-                  $('.donate-date').show()
-                 }
-                )
-                $('#no').click(
-                  function(){
-                    $('.donate-date').hide()
-                  }
-                )
-               
-                
-            
-                userInfo.addEventListener('submit', e=>{
-                  e.preventDefault();
-                  let donate_date = null;
-                  let donor = false;
-                  if(userInfo.donate_status.value === "yes"){
-                    donor = true;
-                    donate_date = userInfo.donate_date.value;
-                  }
-                  
-                  let data = {
-                    name: userInfo.name.value,
-                    location: userInfo.location.value,
-                    gender: userInfo.gender.value,
-                    donate_date: donate_date,
-                    group: userInfo.group.value,
-                    details: userInfo.details.value,
-                    isDonor: donor
-            
-                  }
-                  fstore.collection('users').doc(params.id).update(data).then(()=>{
-                    Swal.fire({
-                      icon: 'success',
-                      title: 'সাবমিট হয়েছে!',
-                      text: 'আপনার তথ্যগুলি সংরক্ষিত হয়েছে।',
-                    });
-                    window.location.reload();
-                  })
-                })
-            
-            
-                //photo upload
-                const imgInp = document.querySelector("#imgInp");
-                imgInp.onchange = (evt) => {
-                  let [file] = imgInp.files;
-                  if (file) {
-                    let url = URL.createObjectURL(file);
-                    $(".avatar").html(`<img src="${url}" />`);
-                 $('#upload').click(function(){
-                    var metadata = {
-                      contentType: "image/jpeg",
-                    };
-                    var uploadTask = storage
-                      .ref()
-                      .child("profile/" + params.id)
-                      .put(file, metadata)
-            
-                    uploadTask.on(
-                      firebase.storage.TaskEvent.STATE_CHANGED,
-                      (snapshot) => {
-                        var progress =
-                          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        console.log("Upload is " + progress + "% done");
-                        $(".uploadProgress").text("Uploading... " + progress + "%");
-                        switch (snapshot.state) {
-                          case firebase.storage.TaskState.PAUSED:
-                            console.log("Upload is paused");
-                            break;
-                          case firebase.storage.TaskState.RUNNING:
-                            $(".uploadProgress").text("Uploading... ");
-                            break;
-                        }
-                      },
-                      (error) => {
-                        console.log(error);
-                        switch (error.code) {
-                          case "storage/unauthorized":
-                            break;
-                          case "storage/canceled":
-                            break;
-                          case "storage/unknown":
-                            break;
-                        }
-                      },
-                      () => {
-                        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                          console.log("File available at", downloadURL);
-                          $(".uploadProgress").html(
-                            '<font color="green">Successfully Uploaded!</font>'
-                          );
-                          fstore.collection("users").doc(params.id).update({
-                            photoURL: downloadURL,
-                          });
-                          setTimeout(function (params) {
-                            $(".uploadProgress").hide(2000);
-                          }, 2000);
-                        });
-                      }
-                    );
-            
-                  })
-                  }
-                };
-            
-            
-              },
-             
-              "/photo_upload": function(){
-              app.innerHTML = `
-              <div class="wrapper">
-              <div class="file-upload">
-                <input type="file" id="imgInp" />
-                <i class="icofont-camera"></i>
-              </div>
-              </div>
-              <div>
-              <div class="image">
-              <img id="image" src="../../images/blood.png" alt="Picture">
-              </div>
-            </div>
-            <h3>Result</h3>
-            <p>
-              <button type="button" id="button">Crop</button>
-            </p>
-            <div id="result"></div>
-            </div>
-              `
-            
-              const imgInp = document.querySelector("#imgInp");
-                imgInp.onchange = (evt) => {
-                  let [file] = imgInp.files;
-                  if (file) {
-                    let url = URL.createObjectURL(file);
-                    console.log(url);
-                    $(".image").html(`<img id="image" src="${url}" alt="Picture">`);
-                
-              function getRoundedCanvas(sourceCanvas) {
-                var canvas = document.createElement('canvas');
-                var context = canvas.getContext('2d');
-                var width = sourceCanvas.width;
-                var height = sourceCanvas.height;
-            
-                canvas.width = width;
-                canvas.height = height;
-                context.imageSmoothingEnabled = true;
-                context.drawImage(sourceCanvas, 0, 0, width, height);
-                context.globalCompositeOperation = 'destination-in';
-                context.beginPath();
-                context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI, true);
-                context.fill();
-                return canvas;
-              }
-            
-                var image = document.getElementById('image');
-                var button = document.getElementById('button');
-                var result = document.getElementById('result');
-                var croppable = false;
-                var cropper = new Cropper(image, {
-                  aspectRatio: 1,
-                  viewMode: 1,
-                  ready: function () {
-                    croppable = true;
-                  },
-                });
-            
-                button.onclick = function () {
-                  var croppedCanvas;
-                  var roundedCanvas;
-                  var roundedImage;
-            
-                  if (!croppable) {
-                    return;
-                  }
-            
-                  // Crop
-                  croppedCanvas = cropper.getCroppedCanvas();
-            
-                  // Round
-                  roundedCanvas = getRoundedCanvas(croppedCanvas);
-                   
-                  let blob = dataURItoBlob(roundedCanvas.toDataURL('image/jpeg', 0.5));
-                  let fd = new FormData();
-                  let myfile = new File([blob], 'myImage.jpg', {type: 'image/jpeg'});
-                  fd.append('myImage', myfile);
-                  console.log(fd);
-                  console.log(myfile); 
-            
-                  storage
-                      .ref()
-                      .child("profile/" + "myphoto")
-                      .put(myfile)
-            
-                  console.log(roundedCanvas);
-                  // Show
-                  roundedImage = document.createElement('img');
-                  roundedImage.src = roundedCanvas.toDataURL()
-                  result.innerHTML = '';
-                  result.appendChild(roundedImage);
-                };
-              
-              }
-            }
-            
-              },            
-            
-              "/photo_upload": function(){
-              app.innerHTML = `
-              <div class="wrapper">
-              <div class="file-upload">
-                <input type="file" id="imgInp" />
-                <i class="icofont-camera"></i>
-              </div>
-              </div>
-              <div>
-              <div class="image">
-              <img id="image" src="../../images/blood.png" alt="Picture">
-              </div>
-            </div>
-            <h3>Result</h3>
-            <p>
-              <button type="button" id="button">Crop</button>
-            </p>
-            <div id="result"></div>
-            </div>
-              `
-            
-              const imgInp = document.querySelector("#imgInp");
-                imgInp.onchange = (evt) => {
-                  let [file] = imgInp.files;
-                  if (file) {
-                    let url = URL.createObjectURL(file);
-                    console.log(url);
-                    $(".image").html(`<img id="image" src="${url}" alt="Picture">`);
-                
-              function getRoundedCanvas(sourceCanvas) {
-                var canvas = document.createElement('canvas');
-                var context = canvas.getContext('2d');
-                var width = sourceCanvas.width;
-                var height = sourceCanvas.height;
-            
-                canvas.width = width;
-                canvas.height = height;
-                context.imageSmoothingEnabled = true;
-                context.drawImage(sourceCanvas, 0, 0, width, height);
-                context.globalCompositeOperation = 'destination-in';
-                context.beginPath();
-                context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI, true);
-                context.fill();
-                return canvas;
-              }
-            
-                var image = document.getElementById('image');
-                var button = document.getElementById('button');
-                var result = document.getElementById('result');
-                var croppable = false;
-                var cropper = new Cropper(image, {
-                  aspectRatio: 1,
-                  viewMode: 1,
-                  ready: function () {
-                    croppable = true;
-                  },
-                });
-            
-                button.onclick = function () {
-                  var croppedCanvas;
-                  var roundedCanvas;
-                  var roundedImage;
-            
-                  if (!croppable) {
-                    return;
-                  }
-            
-                  // Crop
-                  croppedCanvas = cropper.getCroppedCanvas();
-            
-                  // Round
-                  roundedCanvas = getRoundedCanvas(croppedCanvas);
-                   
-                  let blob = dataURItoBlob(roundedCanvas.toDataURL('image/jpeg', 0.5));
-                  let fd = new FormData();
-                  let myfile = new File([blob], 'myImage.jpg', {type: 'image/jpeg'});
-                  fd.append('myImage', myfile);
-                  console.log(fd);
-                  console.log(myfile); 
-            
-                  storage
-                      .ref()
-                      .child("profile/" + "myphoto")
-                      .put(myfile)
-            
-                  console.log(roundedCanvas);
-                  // Show
-                  roundedImage = document.createElement('img');
-                  roundedImage.src = roundedCanvas.toDataURL()
-                  result.innerHTML = '';
-                  result.appendChild(roundedImage);
-                };
-              
-              }
-            }
-            
-              },
               "edit/:id/:id2": function (params) {
                 $('#appBarTitle').text('পোস্ট এডিট');
                 app.innerHTML = `
@@ -988,7 +626,6 @@ firebase.auth().onAuthStateChanged((user) => {
                   bp.reset();
                 });
               },
-            
               "/profile/:id": function(params){   
                 $('#appBarTitle').text('প্রোফাইল');
               app.innerHTML= `
@@ -1061,9 +698,6 @@ firebase.auth().onAuthStateChanged((user) => {
             
               })
               }
-           
-           
-           
             })
             .resolve();
 

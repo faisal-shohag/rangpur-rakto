@@ -60,11 +60,13 @@ router.on({
           text: "সঠিক ফোন নম্বর প্রদান করুন!",
           footer: "ফোন নম্বরটি ১১ ডিজিটের হওয়া জরুরী!",
         });
-
+        $(".loader").hide();
         return;
       }
 
       const appVerifier = window.recaptchaVerifier;
+      
+      $(".loader").hide();
 
       auth
         .signInWithPhoneNumber(phoneNumber, appVerifier)
@@ -85,7 +87,12 @@ router.on({
              signInWithPhone(sentCodeId)
             }
           );
-        });
+        }).then((r)=>{
+          console.log(r)
+        })
+        .catch((e)=>{
+          console.log(e);
+        })
     };
 
     const signInWithPhone = (sentCodeId) => {
@@ -105,7 +112,7 @@ router.on({
             icon: "error",
             title: "Oops...",
             text: "Something went wrong!",
-            footer: '<a href="">Why do I have this issue?</a>',
+            footer: '',
           });
         });
     };
