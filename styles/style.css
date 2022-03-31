@@ -143,8 +143,8 @@ html {
 }
 
 .container .avatar {
-    height: 50px;
-    width: 50px;
+    height: 70px;
+    width: 70px;
     border-radius: 50%;
     overflow: hidden;
     /* border: 2px solid rgb(214, 207, 207); */
@@ -152,8 +152,8 @@ html {
 }
 
 .container .avatar img {
-    height: 50px;
-    width: 50px;
+    height: 70px;
+    width: 70px;
 }
 
 .av {
