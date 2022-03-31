@@ -780,7 +780,7 @@ firebase.auth().onAuthStateChanged((user) => {
                     group: bp.group.value,
                     gender: bp.gender.value,
                     details: bp.details.value,
-                    uid: uid,
+                    uid: user.uid,
                     lat: 89.4323907,
                     lon: 25.9092413,
                     creationTime: firebase.firestore.Timestamp.fromDate(
