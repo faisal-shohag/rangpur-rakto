@@ -12,7 +12,7 @@ router.on({
    <center>
       <div class="auth-logo">
       <img height="70px" src="../../images/blood.png">
-      <div >রংপুর রক্ত</div>
+      <div >Blood Find</div>
       </div>
 </center>
 
