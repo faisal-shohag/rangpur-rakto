@@ -6,7 +6,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .doc(user.uid)
       .onSnapshot((doc) => {
         $(".splash_screen").hide();
-        if (doc.data().name == undefined || doc.data().name == null) {
+        if (doc.data && doc.data().name == undefined || doc.data().name == null) {
           $(".bottom-nav").hide();
           $(".splash_screen").hide();
           $(".av").hide();
@@ -40,7 +40,7 @@ firebase.auth().onAuthStateChanged((user) => {
           router
             .on({
               "/": function (params) {
-                $("#appBarTitle").text("রংপুর রক্ত");
+                $("#appBarTitle").text("Blood Find");
                 navManage("home");
                 app.innerHTML = `
        <div class="sec-horz">
@@ -955,26 +955,26 @@ function getLatLong(id) {
   }
 }
 
-navigator.permissions &&
-  navigator.permissions
-    .query({ name: "geolocation" })
-    .then(function (PermissionStatus) {
-      if (PermissionStatus.state == "granted") {
-        console.log("granted!");
-      } else if (PermissionStatus.state == "prompt") {
-        Swal.fire({
-          icon: "error",
-          title: "আপনার লোকেশন সার্ভিস অফ!",
-          text: "দয়া করে লোকেশন সার্ভিসটি Allow করুন।",
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "আপনার লোকেশন সার্ভিস অফ!",
-          text: "দয়া করে লোকেশন সার্ভিসটি Allow করুন।",
-        });
-      }
-    });
+// navigator.permissions &&
+//   navigator.permissions
+//     .query({ name: "geolocation" })
+//     .then(function (PermissionStatus) {
+//       if (PermissionStatus.state == "granted") {
+//         console.log("granted!");
+//       } else if (PermissionStatus.state == "prompt") {
+//         Swal.fire({
+//           icon: "error",
+//           title: "আপনার লোকেশন সার্ভিস অফ!",
+//           text: "দয়া করে লোকেশন সার্ভিসটি Allow করুন।",
+//         });
+//       } else {
+//         Swal.fire({
+//           icon: "error",
+//           title: "আপনার লোকেশন সার্ভিস অফ!",
+//           text: "দয়া করে লোকেশন সার্ভিসটি Allow করুন।",
+//         });
+//       }
+//     });
 
     function dataURItoBlob(dataURI) {
         var binary = atob(dataURI.split(',')[1]);

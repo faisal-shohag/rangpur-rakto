@@ -251,9 +251,9 @@ router.on({
 
     fstore.collection('users').doc(params.id).onSnapshot(snap=>{
       let data = snap.data();
-      $(".avatar").html(`<img src="${data.photoURL}" />`);
-      if(data.name !== undefined){
- 
+
+      if(data && data.name !== undefined){
+        $(".avatar").html(`<img src="${data.photoURL}" />`);
         
         let isDonor = "no";
         if(data.isDonor == true){ 
@@ -268,7 +268,7 @@ router.on({
         userInfo.details.value = data.details;
         userInfo.donate_status.value = isDonor;
       }
-      if(data.photoURL == undefined){
+      if(data && data.photoURL == undefined){
         fstore.collection('users').doc(params.id).update({
           photoURL: "https://firebasestorage.googleapis.com/v0/b/rangpur-rakto.appspot.com/o/profile%2Fuser.png?alt=media&token=d71fdf2e-95f9-4863-a003-979f765cc736",
         })
